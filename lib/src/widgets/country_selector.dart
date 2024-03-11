@@ -1,8 +1,9 @@
-import 'package:flukit/src/ui/widgets/image.dart';
-import 'package:flukit/src/ui/widgets/inputs.dart';
-import 'package:flukit/src/utils/countries.dart';
-import 'package:flukit/src/utils/extensions/context.dart';
-import 'package:flukit/src/utils/theme.dart';
+import 'package:flukit_core/flukit_core.dart';
+import 'package:flukit_utils/flukit_utils.dart';
+import 'package:flukit_widgets/src/data/enums/image_source.dart';
+import 'package:flukit_widgets/src/data/static/constants.dart';
+import 'package:flukit_widgets/src/widgets/image.dart';
+import 'package:flukit_widgets/src/widgets/inputs.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

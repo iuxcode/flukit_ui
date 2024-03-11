@@ -1,7 +1,16 @@
-import 'package:flukit/flukit.dart';
+import 'package:flukit_core/flukit_core.dart';
+import 'package:flukit_icons/icons.dart';
+import 'package:flukit_utils/flukit_utils.dart';
+import 'package:flukit_widgets/flukit_widgets.dart';
+import 'package:flukit_widgets/src/data/enums/avatar_type.dart';
+import 'package:flukit_widgets/src/data/enums/image_source.dart';
+import 'package:flukit_widgets/src/widgets/image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'outline.dart';
+
+/// displays an avatar with customizable properties
 class FluAvatar extends StatefulWidget {
   const FluAvatar({
     super.key,
@@ -26,7 +35,10 @@ class FluAvatar extends StatefulWidget {
     this.overlayOpacity = 0,
   });
 
+  /// Avatar label style
   final TextStyle? labelStyle;
+
+  /// Image overlay opacity
   final double overlayOpacity;
 
   /// Set to true, if you want the avatar to be a circle
@@ -190,7 +202,7 @@ class _FluAvatarState extends State<FluAvatar> {
 
   @override
   void initState() {
-    defaultAvatar = Flu.getAvatar(type: widget.defaultAvatarType);
+    defaultAvatar = widgetService.getAvatar(type: widget.defaultAvatarType);
     super.initState();
   }
 

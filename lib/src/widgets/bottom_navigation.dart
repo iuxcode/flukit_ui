@@ -1,49 +1,13 @@
 import 'dart:math' as math;
 
-import 'package:flukit/src/ui/widgets/button.dart';
-import 'package:flukit/utils.dart';
 import 'package:flukit_icons/flukit_icons.dart';
+import 'package:flukit_utils/flukit_utils.dart';
+import 'package:flukit_widgets/src/data/models/ui/bottom_nav_item.dart';
+import 'package:flukit_widgets/src/data/models/ui/bottom_nav_style.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-/// Creates an item that is used with [FluBottomNavBar.items].
-class FluBottomNavBarItem {
-  FluBottomNavBarItem(this.icon, this.label);
-
-  final FluIcons icon;
-  final String label;
-}
-
-/// Define a style for [FluBottomNavBar]
-class FluBottomNavBarStyle {
-  const FluBottomNavBarStyle({
-    this.foregroundColor,
-    this.backgroundColor,
-    this.height,
-    this.indicatorSize = 5,
-    this.iconSize = 22,
-    this.iconStrokeWidth = 1.8,
-    this.padding,
-    this.type = FluBottomNavBarTypes.flat,
-    this.unSelectedForegroundColor,
-    this.border,
-    this.iconStyle = FluIconStyles.twotone,
-    this.selectedIconStyle,
-  });
-
-  final Color? backgroundColor;
-  final BoxBorder? border;
-  final Color? foregroundColor;
-  final double? height;
-  final double iconSize;
-  final double iconStrokeWidth;
-  final double indicatorSize;
-  final EdgeInsets? padding;
-  final FluBottomNavBarTypes type;
-  final Color? unSelectedForegroundColor;
-  final FluIconStyles? selectedIconStyle;
-  final FluIconStyles iconStyle;
-}
+import 'button.dart';
 
 /// Creates a bottom navigation bar which is typically
 /// used as a [Scaffold]'s Scaffold.bottomNavigationBar argument.

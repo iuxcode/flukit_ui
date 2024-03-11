@@ -1,5 +1,5 @@
-import 'package:flukit/src/ui/widgets/dashed_circle.dart';
-import 'package:flukit/utils.dart';
+import 'package:flukit_utils/flukit_utils.dart';
+import 'package:flukit_widgets/src/widgets/dashed_circle.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

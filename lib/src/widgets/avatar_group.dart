@@ -1,5 +1,5 @@
-import 'package:flukit/src/ui/widgets/avatar.dart';
-import 'package:flukit/utils.dart';
+import 'package:flukit_utils/flukit_utils.dart';
+import 'package:flukit_widgets/src/widgets/avatar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

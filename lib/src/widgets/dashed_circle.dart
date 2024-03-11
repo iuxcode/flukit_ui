@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flukit/utils.dart';
+import 'package:flukit_utils/flukit_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 

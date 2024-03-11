@@ -1,4 +1,8 @@
-import 'package:flukit/flukit.dart';
+import 'package:flukit_core/flukit_core.dart';
+import 'package:flukit_utils/flukit_utils.dart';
+import 'package:flukit_widgets/flukit_widgets.dart';
+import 'package:flukit_widgets/src/widgets/glass.dart';
+import 'package:flukit_widgets/src/widgets/loader.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

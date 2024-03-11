@@ -1,11 +1,14 @@
 import 'dart:math' as math;
+import 'package:flukit_core/flukit_core.dart';
+import 'package:flukit_widgets/flukit_widgets.dart';
 import 'package:flukit_widgets/src/data/enums/avatar_type.dart';
 import 'package:flukit_widgets/src/widgets/bottom_sheet.dart';
+import 'package:flukit_widgets/src/widgets/country_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 /// Provide UI utilities
-class FluUiUtils {
+extension FluUiUtils on WidgetService {
   /// Hide the keyboard
   Future<void> hideKeyboard() async {
     await SystemChannels.textInput.invokeMethod('TextInput.hide');
@@ -24,8 +27,11 @@ class FluUiUtils {
     if (id != null) {
       number = id;
     } else {
+      const k3DAvatarsCount = 29;
+      const memojisAvatarsCount = 35;
+
       number = math.Random().nextInt(
-        getMaterial3DAvatars ? 29 : 35,
+        getMaterial3DAvatars ? k3DAvatarsCount : memojisAvatarsCount,
       ); // 29 and 35 are the numbers of available avatars
     }
 
