@@ -9,12 +9,12 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  flukit_core:
+    git: https://github.com/iuxcode/flukit_core.git
+  flukit_utils:
+    git: https://github.com/iuxcode/flukit_utils.git
   flutter:
     sdk: flutter
-  flukit_core:
-    path: ../flukit_core
-  flukit_utils:
-    path: ../flukit_utils
   flukit_icons:
     git: https://github.com/iuxcode/flukit_icons.git
   cached_network_image: ^3.3.1
