@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 /// Define a style for [FluBottomNavBar]
 class FluBottomNavBarStyle {
+  /// Create a [FluBottomNavBar] style
   const FluBottomNavBarStyle({
     this.foregroundColor,
     this.backgroundColor,
@@ -19,16 +20,40 @@ class FluBottomNavBarStyle {
     this.selectedIconStyle,
   });
 
+  /// Color of the [FluBottomNavBar]
   final Color? backgroundColor;
+
+  /// Border for the navigation bar
   final BoxBorder? border;
+
+  /// Color of the foreground
+  /// apply to text and icons
   final Color? foregroundColor;
+
+  /// Height of the navigation bar
   final double? height;
+
+  /// Size of the icons
   final double iconSize;
+
+  /// Stroke width of the icons
   final double iconStrokeWidth;
-  final double indicatorSize;
-  final EdgeInsets? padding;
-  final FluBottomNavBarTypes type;
-  final Color? unSelectedForegroundColor;
-  final FluIconStyles? selectedIconStyle;
+
+  /// Style of the icons
   final FluIconStyles iconStyle;
+
+  /// Size of the indicator
+  final double indicatorSize;
+
+  /// Padding for the navigation bar
+  final EdgeInsets? padding;
+
+  /// Style of the selected icon
+  final FluIconStyles? selectedIconStyle;
+
+  /// Type of the navigation bar
+  final FluBottomNavBarTypes type;
+
+  /// Color for unselected icons
+  final Color? unSelectedForegroundColor;
 }

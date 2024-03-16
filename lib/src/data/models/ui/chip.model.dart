@@ -1,7 +1,9 @@
 import 'package:flukit_widgets/src/data/enums/image_source.dart';
 import 'package:flutter/material.dart';
 
+/// Represents a model for a chip widget.
 class FluChipModel {
+  /// Creates a FluChipModel instance.
   FluChipModel({
     this.text,
     this.image,
@@ -18,29 +20,42 @@ class FluChipModel {
           'Chip must have either image or text',
         );
 
+  /// The color of the chip.
   final Color? color;
-  final bool outlined;
-  final EdgeInsets? padding;
-  final double strokeWidth;
-  final TextStyle? textStyle;
-  final double? width;
 
-  /// Chip image
-  /// Can be user avatar, if [FluChipType]
+  /// The image to display on the chip.
   final String? image;
 
-  /// where to get image from.
-  /// Default is set to network.
+  /// The source of the image for the chip.
   final ImageSources imageSource;
 
-  /// Text to display in the chip.
+  /// Whether the chip is outlined.
+  final bool outlined;
+
+  /// The padding of the chip.
+  final EdgeInsets? padding;
+
+  /// The width of the chip's outline stroke.
+  final double strokeWidth;
+
+  /// The text to display on the chip.
   final String? text;
 
-  /// Chip type
+  /// The style of the text on the chip.
+  final TextStyle? textStyle;
+
+  /// The type of the chip.
   final FluChipType type;
+
+  /// The width of the chip.
+  final double? width;
 }
 
+/// Enum representing different types of FluChip.
 enum FluChipType {
+  /// The base type of FluChip.
   base,
+
+  /// The avatar type of FluChip.
   avatar,
 }

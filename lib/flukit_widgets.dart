@@ -25,10 +25,14 @@ export './src/widgets/outline.dart';
 export './src/widgets/page_view.dart';
 export './src/widgets/tabs.dart';
 
+/// Service for managing widgets using a Flukit instance.
 class WidgetService {
-  final Flukit fluInstance;
-
+  /// Widget service constructor
   WidgetService(this.fluInstance);
+
+  /// [Flukit] instance
+  final Flukit fluInstance;
 }
 
+/// Service for managing widgets using a Flukit instance.
 final WidgetService widgetService = WidgetService(Flu);
