@@ -2,12 +2,14 @@ import 'package:flukit_utils/flukit_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-/// Todo add dashes and dots
+/// Provide a more customizable [Divider]
+/// TODO: add dashes and dots
 class FluLine extends StatelessWidget {
+  // ignore: public_member_api_docs
   const FluLine({
     super.key,
     this.height = 1,
-    this.width = 45,
+    this.width,
     this.radius = 0,
     this.margin = EdgeInsets.zero,
     this.color,
@@ -16,12 +18,29 @@ class FluLine extends StatelessWidget {
     this.boxShadow,
   });
 
+  /// Animation curve
   final Curve animationCurve;
+
+  /// Animation duration
   final Duration animationDuration;
+
+  /// Add shadow to the divider
   final BoxShadow? boxShadow;
+
+  /// Color of the divider
   final Color? color;
+
+  /// Space around the divider
   final EdgeInsets? margin;
-  final double height, width, radius;
+
+  /// Height of the divider
+  final double height;
+
+  /// Width of the divider
+  final double? width;
+
+  /// Corner radius of the divider
+  final double radius;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -69,7 +88,7 @@ class FluLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) => AnimatedContainer(
         height: height,
-        width: width,
+        width: width ?? double.infinity,
         margin: margin,
         duration: animationDuration,
         curve: animationCurve,

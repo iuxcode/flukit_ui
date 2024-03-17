@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 /// Add badge to a widget
 class FluBadge extends StatelessWidget {
+  /// Add badge to a widget
   const FluBadge({
     required this.child,
     super.key,
@@ -20,17 +21,41 @@ class FluBadge extends StatelessWidget {
     this.boxShadow,
   });
 
+  /// Add elevation to the badge
   final List<BoxShadow>? boxShadow;
+
+  /// The [Widget] on which the badge is added
   final Widget child;
+
+  /// The color of the badge
   final Color? color;
+
+  /// Add counter to the badge
   final int? count;
+
+  /// The limit of the counter
+  /// Eg: If countLimit is 99, the badge will show 99+
   final int countLimit;
+
+  /// The text/icon color of the badge
   final Color? foregroundColor;
+
+  /// The position of the badge
   final Offset offset;
+
+  /// The color of the outline
   final Color? outlineColor;
+
+  /// The thickness of the outline
   final double outlineThickness;
+
+  /// If the badge is outlined
   final bool outlined;
+
+  /// The position of the badge on the widget
   final BadgePosition position;
+
+  /// The size of the badge
   final double size;
 
   @override
@@ -84,7 +109,10 @@ class FluBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final isLargeBadge = count != null;
     final limitReached = (count ?? 0) > countLimit;
-    double? top, left, right, bottom;
+    double? top;
+    double? left;
+    double? right;
+    double? bottom;
 
     switch (position) {
       case BadgePosition.topLeft:
@@ -151,4 +179,17 @@ class FluBadge extends StatelessWidget {
   }
 }
 
-enum BadgePosition { topLeft, topRight, bottomLeft, bottomRight }
+/// The position of a badge on the widget.
+enum BadgePosition {
+  /// The badge is positioned on the top left of the widget.
+  topLeft,
+
+  /// The badge is positioned on the top right of the widget.
+  topRight,
+
+  /// The badge is positioned on the bottom left of the widget.
+  bottomLeft,
+
+  /// The badge is positioned on the bottom right of the widget.
+  bottomRight,
+}

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_asserts_with_message
+// ignore_for_file: prefer_asserts_with_message, public_member_api_docs
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

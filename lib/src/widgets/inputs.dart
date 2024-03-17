@@ -1,3 +1,6 @@
+/// TODO: Rewrite to use `FluTextField`
+// ignore_for_file: public_member_api_docs
+
 import 'package:flukit_icons/flukit_icons.dart';
 import 'package:flukit_utils/flukit_utils.dart';
 import 'package:flutter/foundation.dart';
@@ -96,7 +99,8 @@ class FluTextField extends StatefulWidget {
   final Widget? prefix;
   final TextSelectionControls? selectionControls;
   final Widget? suffix;
-  final FluIcons? prefixIcon, suffixIcon;
+  final FluIcons? prefixIcon;
+  final FluIcons? suffixIcon;
   final TextAlign textAlign;
   final TextAlignVertical textAlignVertical;
   final TextStyle? textStyle;

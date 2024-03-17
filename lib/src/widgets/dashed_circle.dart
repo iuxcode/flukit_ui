@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 
 /// Draw an arc
 class FluArc extends StatelessWidget {
+  // ignore: public_member_api_docs
   const FluArc({
     super.key,
     this.color,
@@ -21,6 +22,7 @@ class FluArc extends StatelessWidget {
     this.child,
   });
 
+  /// The child to wrap in the arc
   final Widget? child;
 
   /// Arc angle. Eg: 360 for full circle

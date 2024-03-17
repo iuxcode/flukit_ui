@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-/// Todo: Write documentation.
 /// Create a layout with styled system overlay
 class FluScreen extends StatelessWidget {
   // ignore: public_member_api_docs
@@ -41,7 +40,11 @@ class FluScreen extends StatelessWidget {
 
   /// A panel displayed to the side of the [body],
   /// often hidden on mobile devices.
-  final Widget? drawer, endDrawer;
+  final Widget? drawer;
+
+  /// A panel displayed to the side of the [body],
+  /// often hidden on mobile devices.
+  final Widget? endDrawer;
 
   /// If true, and [bottomNavigationBar] or
   /// `persistentFooterButtons` is specified,

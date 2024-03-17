@@ -10,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 /// By default this will call the image from network.
 /// If you want to load image from assets, you can use `FluImage.asset`
 class FluImage extends StatelessWidget {
+  // ignore: public_member_api_docs
   const FluImage(
     this.image, {
     this.imageSource = ImageSources.network,
@@ -31,6 +32,7 @@ class FluImage extends StatelessWidget {
     super.key,
   });
 
+  /// Display vector image
   const factory FluImage.svg(
     String svg, {
     Color? color,
@@ -212,8 +214,8 @@ class FluImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget child;
-    var height = expand ? double.infinity : this.height,
-        width = expand ? double.infinity : this.width;
+    var height = expand ? double.infinity : this.height;
+    var width = expand ? double.infinity : this.width;
 
     if (square) {
       final size = _dimensionsToSquare(this.height, this.width);

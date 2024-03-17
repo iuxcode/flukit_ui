@@ -4,7 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// A modal bottom sheet widget.
 class FluModalBottomSheet extends StatelessWidget {
+  /// Constructs a [FluModalBottomSheet] widget.
   const FluModalBottomSheet({
     required this.child,
     super.key,
@@ -16,12 +18,25 @@ class FluModalBottomSheet extends StatelessWidget {
     this.scrollable = true,
   });
 
+  /// Animation curve
   final Curve animationCurve;
+
+  /// Animation duration
   final Duration animationDuration;
+
+  /// Creates a widget that insets its child.
   final Widget child;
+
+  /// Corner radius
   final double? cornerRadius;
+
+  /// Max height
   final double? maxHeight;
+
+  /// The amount of space by which to inset the child.
   final EdgeInsets padding;
+
+  /// If true, The child can scroll inside the bottom sheet
   final bool scrollable;
 
   @override

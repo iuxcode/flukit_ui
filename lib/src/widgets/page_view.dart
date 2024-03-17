@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-/// A scrollable list that works page by page.
-/// Todo: Complete documentation
+/// Notify page changes
 class PageViewNotifier extends StatefulWidget {
+  /// Constructor for PageViewNotifier
   const PageViewNotifier({
     required this.notifier,
     required this.child,
@@ -11,13 +11,19 @@ class PageViewNotifier extends StatefulWidget {
     super.key,
   });
 
+  /// The child widget to display
   final Widget child;
+
+  /// Controller for the page view
   final PageController? controller;
+
+  /// ValueNotifier to notify page changes
   final ValueNotifier<double> notifier;
 
   @override
   State<PageViewNotifier> createState() => _PageViewNotifierState();
 
+  // Adds diagnostic properties for notifier and controller
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

@@ -1,5 +1,7 @@
 /// Material design 3 recommended font sizes.
 /// https://m3.material.io/styles/typography/type-scale-tokens#40fc37f8-3269-4aa3-9f28-c6113079ac5d
+// ignore_for_file: public_member_api_docs
+
 class M3FontSizes {
   static const double displaySmall = 36;
   static const double displayMedium = 45;

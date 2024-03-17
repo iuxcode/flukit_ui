@@ -2,8 +2,6 @@ import 'dart:math' as math;
 import 'package:flukit_core/flukit_core.dart';
 import 'package:flukit_widgets/flukit_widgets.dart';
 import 'package:flukit_widgets/src/data/enums/avatar_type.dart';
-import 'package:flukit_widgets/src/widgets/bottom_sheet.dart';
-import 'package:flukit_widgets/src/widgets/country_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -73,8 +71,8 @@ extension FluUiUtils on WidgetService {
     BuildContext context, {
     List<Country>? countries,
     List<Country> exclude = const [],
-    String? title,
-    String? description,
+    required String title,
+    required String description,
     TextStyle? titleStyle,
     TextStyle? descriptionStyle,
     EdgeInsets padding =

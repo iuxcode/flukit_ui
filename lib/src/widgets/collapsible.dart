@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+/// A widget that can collapse its child based on a collapse flag.
 class FluCollapsible extends StatefulWidget {
+  /// Constructor for FluCollapsible widget.
   const FluCollapsible({
     required this.collapse,
     required this.axis,
@@ -12,11 +14,22 @@ class FluCollapsible extends StatefulWidget {
     this.curve = Curves.linear,
   });
 
+  /// Alignment of the child widget
   final Alignment alignment;
+
+  /// Axis along which the child collapses
   final Axis axis;
+
+  /// The child widget to be collapsed
   final Widget child;
+
+  /// Flag to determine if the child should be collapsed
   final bool collapse;
+
+  /// Curve for the collapse animation
   final Curve curve;
+
+  /// Duration of the collapse animation
   final Duration duration;
 
   @override
@@ -30,25 +43,17 @@ class FluCollapsible extends StatefulWidget {
       ..add(EnumProperty<Axis>('axis', axis))
       ..add(DiagnosticsProperty<bool>('collapse', collapse))
       ..add(DiagnosticsProperty<Curve>('curve', curve))
-      ..add(DiagnosticsProperty<Duration>('duration', duration))
-      ..add(EnumProperty<Axis>('axis', axis))
-      ..add(DiagnosticsProperty<bool>('collapse', collapse))
-      ..add(DiagnosticsProperty<Curve>('curve', curve))
-      ..add(DiagnosticsProperty<Duration>('duration', duration))
-      ..add(EnumProperty<Axis>('axis', axis))
-      ..add(DiagnosticsProperty<bool>('collapse', collapse))
-      ..add(DiagnosticsProperty<Curve>('curve', curve))
-      ..add(DiagnosticsProperty<Duration>('duration', duration))
-      ..add(EnumProperty<Axis>('axis', axis))
-      ..add(DiagnosticsProperty<bool>('collapse', collapse))
-      ..add(DiagnosticsProperty<Curve>('curve', curve))
       ..add(DiagnosticsProperty<Duration>('duration', duration));
   }
 }
 
+// ignore: public_member_api_docs
 class FluCollapsibleState extends State<FluCollapsible>
     with SingleTickerProviderStateMixin {
+  /// Animation for the collapse animation
   late final Animation<double> animation;
+
+  /// Controller for the collapse animation
   late final AnimationController controller;
 
   @override

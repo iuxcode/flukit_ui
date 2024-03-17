@@ -8,7 +8,11 @@ const double _defaultChipHeight = 62;
 const Clip _defaultChipClipBehavior = Clip.hardEdge;
 const EdgeInsets _defaultChipPadding = EdgeInsets.symmetric(horizontal: 20);
 
+/// This class definition creates a widget called FluChips
+/// that displays a list of chips.
 class FluChips extends StatefulWidget {
+  /// Constructor that initializes various properties
+  /// and shuffles the chips if specified.
   FluChips({
     required this.chips,
     super.key,
@@ -32,28 +36,55 @@ class FluChips extends StatefulWidget {
     if (shuffle) chips.shuffle();
   }
 
+  /// The curve of the animation for the chips
   final Curve animationCurve;
+
+  /// The duration of the animation for the chips
   final Duration animationDuration;
+
+  /// The clipping behavior for the chips
   final Clip chipClipBehavior;
+
+  /// The height of each chip
   final double chipHeight;
+
+  /// The padding around each chip
   final EdgeInsets chipPadding;
+
+  /// The text style for the chips
   final TextStyle? chipTextStyle;
+
+  /// The alignment of the chips in the cross axis
   final WrapCrossAlignment crossAxisAlignment;
+
+  /// The initial scroll offset for the chips
   final double initialScrollOffset;
+
+  /// The padding around the chips widget
   final EdgeInsets padding;
-  final double spacing, runSpacing;
+
+  /// The horizontal and vertical spacing between chips
+  final double spacing;
+
+  ///
+  final double runSpacing;
+
+  /// The controller for scrolling the chips
   final ScrollController? scrollController;
+
+  /// Whether to shuffle the order of the chips
   final bool shuffle;
+
+  /// The direction in which the chips are laid out
   final VerticalDirection verticalDirection;
 
-  /// Chips
+  /// The list of chip models to display
   final List<FluChipModel> chips;
 
-  /// Can chips be scrolled horizontally
-  /// If false they are just wrapped in parent container.
+  /// Whether the chips can be scrolled horizontally
   final bool isScrollable;
 
-  /// Number of rows to have if this is scrollable
+  /// The number of rows to display if the chips are scrollable
   final int rows;
 
   @override
@@ -264,7 +295,8 @@ class _FluChipsState extends State<FluChips> {
       for (var i = 0; i < widget.rows; i++) {
         if (widget.chips.length > chipsPerRow) {
           final row = <FluChipModel>[];
-          var rangeStart = i * chipsPerRow, rangeLimit = (i + 1) * chipsPerRow;
+          final rangeStart = i * chipsPerRow;
+          var rangeLimit = (i + 1) * chipsPerRow;
 
           final mustTakeTheRest = (chipsRest - chipsPerRow) <= 1;
           rangeLimit = mustTakeTheRest || (rangeLimit > widget.chips.length)
@@ -322,7 +354,9 @@ class _FluChipsState extends State<FluChips> {
   }
 }
 
+/// Custom widget for displaying a FluChip
 class FluChip extends StatelessWidget {
+  /// Constructor for FluChip
   const FluChip({
     required this.chip,
     super.key,
@@ -333,32 +367,30 @@ class FluChip extends StatelessWidget {
     this.margin = EdgeInsets.zero,
   });
 
+  /// The data model for the FluChip
   final FluChipModel chip;
+
+  /// The clipping behavior
   final Clip clipBehavior;
+
+  /// The height of the chip
   final double height;
-  final EdgeInsets padding, margin;
+
+  /// The padding of the chip
+  final EdgeInsets padding;
+
+  /// The margin of the chip
+  final EdgeInsets margin;
+
+  /// The text style for the chip
   final TextStyle? textStyle;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
+    // Add diagnostic properties for the FluChip
     properties
       ..add(DiagnosticsProperty<FluChipModel>('chip', chip))
-      ..add(EnumProperty<Clip>('clipBehavior', clipBehavior))
-      ..add(DoubleProperty('height', height))
-      ..add(DiagnosticsProperty<EdgeInsets>('padding', padding))
-      ..add(DiagnosticsProperty<EdgeInsets>('margin', margin))
-      ..add(DiagnosticsProperty<TextStyle?>('textStyle', textStyle))
-      ..add(EnumProperty<Clip>('clipBehavior', clipBehavior))
-      ..add(DoubleProperty('height', height))
-      ..add(DiagnosticsProperty<EdgeInsets>('padding', padding))
-      ..add(DiagnosticsProperty<EdgeInsets>('margin', margin))
-      ..add(DiagnosticsProperty<TextStyle?>('textStyle', textStyle))
-      ..add(EnumProperty<Clip>('clipBehavior', clipBehavior))
-      ..add(DoubleProperty('height', height))
-      ..add(DiagnosticsProperty<EdgeInsets>('padding', padding))
-      ..add(DiagnosticsProperty<EdgeInsets>('margin', margin))
-      ..add(DiagnosticsProperty<TextStyle?>('textStyle', textStyle))
       ..add(EnumProperty<Clip>('clipBehavior', clipBehavior))
       ..add(DoubleProperty('height', height))
       ..add(DiagnosticsProperty<EdgeInsets>('padding', padding))
@@ -368,9 +400,11 @@ class FluChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Calculate the width based on the FluChipModel data
     final width = (chip.image != null && chip.text == null) ? height * 2 : null;
     late final Widget child;
 
+    // Determine the child widget based on the FluChipModel data
     child = chip.image != null
         ? FluImage(
             chip.image!,
@@ -383,6 +417,7 @@ class FluChip extends StatelessWidget {
             style: textStyle?.merge(chip.textStyle) ?? chip.textStyle,
           );
 
+    // Construct and return the FluChip widget
     return UnconstrainedBox(
       child: Container(
         height: height,

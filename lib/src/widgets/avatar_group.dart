@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 /// Creates a group of stacked avatar
 class FluAvatarGroup extends StatelessWidget {
+  /// Creates a group of stacked avatar
   const FluAvatarGroup({
     required this.itemCount,
     super.key,
@@ -18,11 +19,23 @@ class FluAvatarGroup extends StatelessWidget {
           'Visible items must be less than items',
         );
 
+  /// Item builder
+  /// build the avatar
   final FluAvatar Function(int index)? itemBuilder;
+
+  /// Handle on avatar tap event
   final void Function(int index)? onTap;
+
+  /// Number of avatar to stack
   final int itemCount;
+
+  /// Layout of the group
   final FluAvatarGroupLayout layout;
+
+  /// Overlap size between avatars
   final double overlapSize;
+
+  /// Number of visible avatar
   final int visibleItemCount;
 
   @override
@@ -115,4 +128,17 @@ class FluAvatarGroup extends StatelessWidget {
   }
 }
 
-enum FluAvatarGroupLayout { overlap, triangle, square }
+/// Enum representing the layout options for FluAvatarGroup.
+///
+/// The FluAvatarGroupLayout enum defines the different layout options
+/// that can be used to arrange the avatars in the group.
+enum FluAvatarGroupLayout {
+  /// Arrange the avatars in the group with overlap.
+  overlap,
+
+  /// Arrange the avatars group in a triangle.
+  triangle,
+
+  /// Arrange the avatars in a square.
+  square
+}

@@ -1,5 +1,5 @@
 import 'package:flukit_icons/flukit_icons.dart';
-import 'package:flukit_widgets/src/widgets/bottom_navigation.dart';
+import 'package:flukit_widgets/src/widgets/bottom_navigation/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 
 /// Define a style for [FluBottomNavBar]

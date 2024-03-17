@@ -1,17 +1,14 @@
 import 'package:flukit_core/flukit_core.dart';
-import 'package:flukit_icons/icons.dart';
 import 'package:flukit_utils/flukit_utils.dart';
 import 'package:flukit_widgets/flukit_widgets.dart';
 import 'package:flukit_widgets/src/data/enums/avatar_type.dart';
 import 'package:flukit_widgets/src/data/enums/image_source.dart';
-import 'package:flukit_widgets/src/widgets/image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'outline.dart';
-
 /// displays an avatar with customizable properties
 class FluAvatar extends StatefulWidget {
+  /// Create an avatar
   const FluAvatar({
     super.key,
     this.image,

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 /// Creates a circular progress indicator.
 /// Inspired by https://vuesax.com/docs/components/Loading.html#type
 class FluLoader extends StatefulWidget {
+  // ignore: public_member_api_docs
   const FluLoader({
     super.key,
     this.size = 30,

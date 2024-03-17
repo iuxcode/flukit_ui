@@ -1,15 +1,12 @@
+import 'package:flukit_widgets/src/data/enums/grid.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-enum FluGridType {
-  normal,
-  masonry,
-}
-
 /// Use `flutter_staggered_grid_view` to create scrollable,
 /// 2D array of widgets with a fixed number of tiles in the cross axis.
 class FluGrid extends StatelessWidget {
+  // ignore: public_member_api_docs
   const FluGrid({
     super.key,
     this.type = FluGridType.masonry,
@@ -24,14 +21,31 @@ class FluGrid extends StatelessWidget {
     this.physics = const NeverScrollableScrollPhysics(),
   });
 
+  /// Creates a scrollable, 2D array of widgets
   final Widget Function(BuildContext, int)? itemBuilder;
+
+  /// Grid children
   final List<Widget> children;
+
+  /// Number of tiles in the cross axis
   final int crossAxisCount;
+
+  /// Space between tiles in the cross axis
   final double crossAxisSpacing;
+
+  /// Number of tiles in the main axis
   final int? itemCount;
+
+  /// Span between tiles in the main axis
   final double mainAxisSpacing;
+
+  /// Creates scroll physics
   final ScrollPhysics physics;
+
+  /// Reverse the order of the children
   final bool reverse;
+
+  /// Shrink wrap the grid
   final bool shrinkWrap;
 
   /// Grid type. Define a layout for the grid.

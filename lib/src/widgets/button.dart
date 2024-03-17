@@ -1,8 +1,6 @@
 import 'package:flukit_core/flukit_core.dart';
 import 'package:flukit_utils/flukit_utils.dart';
 import 'package:flukit_widgets/flukit_widgets.dart';
-import 'package:flukit_widgets/src/widgets/glass.dart';
-import 'package:flukit_widgets/src/widgets/loader.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +10,7 @@ class FluButton extends StatelessWidget {
   const FluButton({
     required this.child,
     this.onPressed,
-    this.backgroundColor,
+    this.color,
     this.foregroundColor,
     this.padding = EdgeInsets.zero,
     this.margin = EdgeInsets.zero,
@@ -47,7 +45,7 @@ class FluButton extends StatelessWidget {
     double iconStrokeWidth,
     FluIconStyles iconStyle,
     VoidCallback? onPressed,
-    Color? backgroundColor,
+    Color? color,
     Color? foregroundColor,
     EdgeInsets padding,
     EdgeInsets margin,
@@ -88,7 +86,7 @@ class FluButton extends StatelessWidget {
     FluIconStyles iconStyle,
     double gap,
     VoidCallback? onPressed,
-    Color? backgroundColor,
+    Color? color,
     Color? foregroundColor,
     Color? iconColor,
     EdgeInsets padding,
@@ -117,32 +115,91 @@ class FluButton extends StatelessWidget {
     bool spaceBetweenChildren,
   }) = _FluTextButton;
 
+  /// The alignment of the button's content
   final AlignmentGeometry? alignment;
-  final Color? backgroundColor;
+
+  /// The button color
+  final Color? color;
+
+  /// If true, the button will occupy the full width of its container
   final bool block;
+
+  /// Creates a rounded rectangle border.
   final BorderSide? border;
+
+  /// The button's border radius
   final BorderRadius? borderRadius;
+
+  /// Add shadow to the button
   final List<BoxShadow>? boxShadow;
+
+  /// The button content
   final Widget child;
+
+  /// Define the clip behavior
   final Clip clipBehavior;
+
+  /// The corner radius of the button corners
   final double? cornerRadius;
+
+  /// The elevation of the button's
   final double elevation;
+
+  /// If true, the button will occupy the full width of its container
   final bool expand;
+
+  /// If true, the button will be filled with the [color] provided
   final bool filled;
+
+  /// If true, the button will be flat
+  /// A [TextButton] will be created
   final bool flat;
+
+  /// Text color
+  /// Also apply to icon if `iconColor` is not provided
   final Color? foregroundColor;
+
+  /// Button height
   final double? height;
+
+  /// Widget to display while loading
   final Widget? loader;
+
+  /// Default loader color
   final Color? loaderColor;
+
+  /// Default loader overlay color
   final Color? loaderOverlayColor;
+
+  /// Is the button loading?
   final bool loading;
+
+  /// Text to display while loading
   final String? loadingText;
+
+  /// Outside space around the button
   final EdgeInsets margin;
+
+  /// Handle onPressed event
   final VoidCallback? onPressed;
+
+  /// Space around the button content
   final EdgeInsets padding;
+
+  /// If true, the loader will not be displayed on top of the button content
+  /// The content will be replaced by the content
   final bool replaceContentOnLoading;
+
+  /// The highlight color that's typically used to indicate
+  /// that the button is focused, hovered, or pressed.
   final Color? splashColor;
+
+  /// Creates the [InkWell] splash factory,
+  /// which defines the appearance of "ink" splashes
+  /// that occur in response to taps.
   final InteractiveInkFeatureFactory? splashFactory;
+
+  /// The width of the button
   final double? width;
 
   @override
@@ -150,7 +207,7 @@ class FluButton extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty<AlignmentGeometry?>('alignment', alignment))
-      ..add(ColorProperty('backgroundColor', backgroundColor))
+      ..add(ColorProperty('backgroundColor', color))
       ..add(DiagnosticsProperty<bool>('block', block))
       ..add(DiagnosticsProperty<BorderRadius?>('borderRadius', borderRadius))
       ..add(IterableProperty<BoxShadow>('boxShadow', boxShadow))
@@ -184,7 +241,7 @@ class FluButton extends StatelessWidget {
         ),
       )
       ..add(EnumProperty<Clip>('clipBehavior', clipBehavior))
-      ..add(ColorProperty('backgroundColor', backgroundColor))
+      ..add(ColorProperty('backgroundColor', color))
       ..add(DiagnosticsProperty<bool>('block', block))
       ..add(DiagnosticsProperty<BorderRadius?>('borderRadius', borderRadius))
       ..add(IterableProperty<BoxShadow>('boxShadow', boxShadow))
@@ -218,7 +275,7 @@ class FluButton extends StatelessWidget {
         ),
       )
       ..add(EnumProperty<Clip>('clipBehavior', clipBehavior))
-      ..add(ColorProperty('backgroundColor', backgroundColor))
+      ..add(ColorProperty('backgroundColor', color))
       ..add(DiagnosticsProperty<bool>('block', block))
       ..add(DiagnosticsProperty<BorderRadius?>('borderRadius', borderRadius))
       ..add(IterableProperty<BoxShadow>('boxShadow', boxShadow))
@@ -252,7 +309,7 @@ class FluButton extends StatelessWidget {
         ),
       )
       ..add(EnumProperty<Clip>('clipBehavior', clipBehavior))
-      ..add(ColorProperty('backgroundColor', backgroundColor))
+      ..add(ColorProperty('backgroundColor', color))
       ..add(DiagnosticsProperty<bool>('block', block))
       ..add(DiagnosticsProperty<BorderRadius?>('borderRadius', borderRadius))
       ..add(IterableProperty<BoxShadow>('boxShadow', boxShadow))
@@ -304,7 +361,7 @@ class FluButton extends StatelessWidget {
       fixedSize: MaterialStatePropertyAll(
         hasCustomSize ? Size.infinite : null,
       ),
-      backgroundColor: MaterialStatePropertyAll(backgroundColor),
+      backgroundColor: MaterialStatePropertyAll(color),
       foregroundColor: MaterialStatePropertyAll(foregroundColor),
       overlayColor: MaterialStatePropertyAll(splashColor),
       padding: MaterialStatePropertyAll(padding),
@@ -435,7 +492,7 @@ class _FluIconButton extends FluButton {
     this.iconStrokeWidth = 1.5,
     this.iconStyle = FluIconStyles.twotone,
     super.onPressed,
-    super.backgroundColor,
+    super.color,
     super.foregroundColor,
     super.padding = EdgeInsets.zero,
     super.margin = EdgeInsets.zero,
@@ -507,7 +564,7 @@ class _FluTextButton extends FluButton {
   const _FluTextButton(
     this.text, {
     super.onPressed,
-    super.backgroundColor,
+    super.color,
     super.foregroundColor,
     super.padding = EdgeInsets.zero,
     super.margin = EdgeInsets.zero,

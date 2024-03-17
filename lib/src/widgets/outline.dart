@@ -3,8 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 
-/// Create a border around the `child`.
+/// Create a border around a [Widget].
 class FluOutline extends StatelessWidget {
+  /// Create a border around a [Widget] with the given properties.
   const FluOutline({
     required this.child,
     super.key,
@@ -20,16 +21,38 @@ class FluOutline extends StatelessWidget {
     this.circle = false,
   });
 
+  /// The border radius of the container.
   final BorderRadius? borderRadius;
+
+  /// Add shadows to the container.
   final List<BoxShadow>? boxShadow;
+
+  /// The [Widget] to wrap.
   final Widget child;
+
+  /// If true, the container will be a circle.
   final bool circle;
+
+  /// The colors of the outline
+  /// if you provide more than one color, the outline will be gradient
   final List<Color> colors;
+
+  /// Corner radius
   final double cornerRadius;
+
+  /// Space amount between the border and the [child].
   final double gap;
+
+  /// Where the gradient start.
   final Alignment gradientBegin;
+
+  /// Where the gradient ends.
   final Alignment gradientEnd;
+
+  /// Space out the border from the container.
   final EdgeInsets margin;
+
+  /// The thickness of the border.
   final double thickness;
 
   @override
