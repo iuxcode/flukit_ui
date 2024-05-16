@@ -12,10 +12,12 @@ dependencies:
   cached_network_image: ^3.3.1
   flukit_core:
     git: https://github.com/iuxcode/flukit_core.git
+    ref: V1.0.0
   flukit_icons:
     git: https://github.com/iuxcode/flukit_icons.git
   flukit_utils:
     git: https://github.com/iuxcode/flukit_utils.git
+    ref: v1.0.0
   flutter:
     sdk: flutter
   flutter_staggered_grid_view: ^0.7.0
