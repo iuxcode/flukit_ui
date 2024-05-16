@@ -13,7 +13,7 @@ dependencies:
   flukit_core:
     git:
       url: https://github.com/iuxcode/flukit_core.git
-      ref: V1.0.0
+      ref: v1.0.0
   flukit_icons:
     git: https://github.com/iuxcode/flukit_icons.git
   flukit_utils:
