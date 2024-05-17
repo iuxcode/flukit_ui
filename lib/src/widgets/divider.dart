@@ -93,7 +93,7 @@ class FluLine extends StatelessWidget {
         duration: animationDuration,
         curve: animationCurve,
         decoration: BoxDecoration(
-          color: color ?? context.colorScheme.surfaceVariant,
+          color: color ?? context.colorScheme.surfaceContainer,
           borderRadius: BorderRadius.circular(radius),
           boxShadow: [if (boxShadow != null) boxShadow!],
         ),

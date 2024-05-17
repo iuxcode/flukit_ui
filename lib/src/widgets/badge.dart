@@ -156,7 +156,7 @@ class FluBadge extends StatelessWidget {
               border: outlined
                   ? Border.all(
                       width: outlineThickness,
-                      color: outlineColor ?? context.colorScheme.background,
+                      color: outlineColor ?? context.colorScheme.surface,
                     )
                   : null,
               boxShadow: boxShadow,

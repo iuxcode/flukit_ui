@@ -104,8 +104,9 @@ class FluOutline extends StatelessWidget {
 
     if (colors.length <= 1) {
       border = Border.all(
-        color:
-            colors.isEmpty ? context.colorScheme.surfaceVariant : colors.first,
+        color: colors.isEmpty
+            ? context.colorScheme.surfaceContainer
+            : colors.first,
         width: thickness,
       );
     } else {

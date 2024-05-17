@@ -1,8 +1,6 @@
 import 'package:flukit_core/flukit_core.dart';
 import 'package:flukit_utils/flukit_utils.dart';
 import 'package:flukit_widgets/flukit_widgets.dart';
-import 'package:flukit_widgets/src/data/enums/avatar_type.dart';
-import 'package:flukit_widgets/src/data/enums/image_source.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -281,7 +279,7 @@ class _FluAvatarState extends State<FluAvatar> {
           margin: widget.margin,
           thickness: widget.outlineThickness,
           gap: widget.outlineGap,
-          colors: widget.outlineColor ?? [context.colorScheme.surfaceVariant],
+          colors: widget.outlineColor ?? [context.colorScheme.surfaceContainer],
           circle: _isCircle,
           cornerRadius: widget.cornerRadius + widget.outlineGap,
           child: child,

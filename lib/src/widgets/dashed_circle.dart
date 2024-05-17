@@ -67,7 +67,7 @@ class FluArc extends StatelessWidget {
         painter: _ArcPainter(
           color: color ?? context.colorScheme.primary,
           disabledDashColor:
-              disabledDashColor ?? context.colorScheme.surfaceVariant,
+              disabledDashColor ?? context.colorScheme.surfaceContainer,
           strokeWidth: strokeWidth,
           numberOfDashes: numberOfDashes,
           gapSize: gapSize,

@@ -358,16 +358,16 @@ class FluButton extends StatelessWidget {
     final hasCustomSize = expand || block || height != null || width != null;
 
     final buttonStyle = ButtonStyle(
-      fixedSize: MaterialStatePropertyAll(
+      fixedSize: WidgetStatePropertyAll(
         hasCustomSize ? Size.infinite : null,
       ),
-      backgroundColor: MaterialStatePropertyAll(color),
-      foregroundColor: MaterialStatePropertyAll(foregroundColor),
-      overlayColor: MaterialStatePropertyAll(splashColor),
-      padding: MaterialStatePropertyAll(padding),
-      elevation: MaterialStatePropertyAll(boxShadow == null ? elevation : null),
+      backgroundColor: WidgetStatePropertyAll(color),
+      foregroundColor: WidgetStatePropertyAll(foregroundColor),
+      overlayColor: WidgetStatePropertyAll(splashColor),
+      padding: WidgetStatePropertyAll(padding),
+      elevation: WidgetStatePropertyAll(boxShadow == null ? elevation : null),
       shape: borderRadius != null || cornerRadius != null || border != null
-          ? MaterialStatePropertyAll(
+          ? WidgetStatePropertyAll(
               RoundedRectangleBorder(
                 side: border ?? BorderSide.none,
                 borderRadius:
@@ -763,9 +763,9 @@ Color _getButtonOverlayColor(
   if (disabled) {
     return colorScheme.surface;
   } else if (elevation > 0 && !flat && !filled) {
-    return colorScheme.background;
+    return colorScheme.surface;
   } else if (flat) {
-    return colorScheme.background;
+    return colorScheme.surface;
   } else if (filled) {
     return colorScheme.primary;
   } else {
@@ -785,7 +785,7 @@ Color _getButtonForegroundColor(
   if (disabled) {
     return colorScheme.onSurface;
   } else if (elevation > 0 && !flat && !filled) {
-    return colorScheme.onBackground;
+    return colorScheme.onSurface;
   } else if (flat) {
     return colorScheme.primary;
   } else if (filled) {

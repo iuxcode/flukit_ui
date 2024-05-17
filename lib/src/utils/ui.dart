@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 import 'package:flukit_core/flukit_core.dart';
 import 'package:flukit_widgets/flukit_widgets.dart';
-import 'package:flukit_widgets/src/data/enums/avatar_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

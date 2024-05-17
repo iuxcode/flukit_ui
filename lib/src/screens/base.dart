@@ -189,7 +189,7 @@ class FluScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor = background ?? context.colorScheme.background;
+    final backgroundColor = background ?? context.colorScheme.surface;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: context.systemUiOverlayStyle.copyWith(
@@ -212,7 +212,7 @@ class FluScreen extends StatelessWidget {
       ),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: background ?? context.colorScheme.background,
+        backgroundColor: background ?? context.colorScheme.surface,
         extendBody: extendBody,
         appBar: appBar,
         body: body,

@@ -82,7 +82,7 @@ class FluModalBottomSheet extends StatelessWidget {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light.copyWith(
         statusBarColor: Colors.transparent,
-        systemNavigationBarColor: context.colorScheme.background,
+        systemNavigationBarColor: context.colorScheme.surface,
       ),
       child: Padding(
         padding:
@@ -94,7 +94,7 @@ class FluModalBottomSheet extends StatelessWidget {
               height: 3,
               width: context.width * .20,
               radius: 50,
-              color: context.colorScheme.background,
+              color: context.colorScheme.surface,
               margin: const EdgeInsets.only(bottom: 8),
             ),
             Flexible(
@@ -108,7 +108,7 @@ class FluModalBottomSheet extends StatelessWidget {
                     topLeft: defaultCornerRadius,
                     topRight: defaultCornerRadius,
                   ),
-                  color: context.colorScheme.background,
+                  color: context.colorScheme.surface,
                 ),
                 child: scrollable
                     ? SingleChildScrollView(

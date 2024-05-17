@@ -118,8 +118,8 @@ class _FluBottomNavBarState extends State<FluBottomNavBar> {
   Widget build(BuildContext context) {
     final foregroundColor =
         widget.style.foregroundColor ?? context.colorScheme.primary;
-    final unSelectedForegroundColor = widget.style.unSelectedForegroundColor ??
-        context.colorScheme.onBackground;
+    final unSelectedForegroundColor =
+        widget.style.unSelectedForegroundColor ?? context.colorScheme.onSurface;
     final height = widget.style.height ?? context.height * .1;
 
     Widget bottomNav = Container(

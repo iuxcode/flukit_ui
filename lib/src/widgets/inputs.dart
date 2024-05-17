@@ -463,7 +463,7 @@ class _FluTextFieldState<T extends FluTextField> extends State<T> {
       .merge(widget.textStyle);
 
   Color get _fillColor =>
-      widget.fillColor ?? context.colorScheme.surfaceVariant;
+      widget.fillColor ?? context.colorScheme.surfaceContainer;
 
   double? get height {
     if (widget.expand && widget.maxHeight == null) {
@@ -502,7 +502,7 @@ class _FluTextFieldState<T extends FluTextField> extends State<T> {
         border: widget.borderWidth != null
             ? Border.all(
                 color: widget.borderColor ??
-                    context.colorScheme.background.withOpacity(.05),
+                    context.colorScheme.surface.withOpacity(.05),
                 width: widget.borderWidth!,
               )
             : null,
