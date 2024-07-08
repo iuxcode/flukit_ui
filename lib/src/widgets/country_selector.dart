@@ -99,7 +99,7 @@ class FluCountrySelector extends StatelessWidget {
                 child: Row(
                   children: [
                     FluImage(
-                      'icons/flags/png/${country.isoCode.toLowerCase()}.png',
+                      'icons/flags/png100px/${country.isoCode.toLowerCase()}.png',
                       package: 'country_icons',
                       imageSource: ImageSources.asset,
                       height: flagSize,
