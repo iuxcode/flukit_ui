@@ -1,6 +1,6 @@
+import 'package:flukit_ui/src/data/models/ui/chip.model.dart';
+import 'package:flukit_ui/src/widgets/image.dart';
 import 'package:flukit_utils/flukit_utils.dart';
-import 'package:flukit_widgets/src/data/models/ui/chip.model.dart';
-import 'package:flukit_widgets/src/widgets/image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

@@ -1,11 +1,11 @@
 import 'dart:math' as math;
 import 'package:flukit_core/flukit_core.dart';
-import 'package:flukit_widgets/flukit_widgets.dart';
+import 'package:flukit_ui/flukit_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 /// Provide UI utilities
-extension FluUiUtils on WidgetService {
+extension FluUiUtils on FlukitUI {
   /// Hide the keyboard
   Future<void> hideKeyboard() async {
     await SystemChannels.textInput.invokeMethod('TextInput.hide');

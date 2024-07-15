@@ -1,7 +1,7 @@
-name: flukit_widgets
+name: flukit_ui
 description: "Comprehensive UI component package within the Flukit framework, providing customizable and reusable widgets for creating engaging Flutter user interfaces."
 version: 0.0.1
-homepage: https://github.com/iuxcode/flukit_widgets.git
+homepage: https://github.com/iuxcode/flukit_ui.git
 publish_to: none
 
 environment:

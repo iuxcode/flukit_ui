@@ -1,6 +1,6 @@
 import 'package:flukit_core/flukit_core.dart';
+import 'package:flukit_ui/flukit_ui.dart';
 import 'package:flukit_utils/flukit_utils.dart';
-import 'package:flukit_widgets/flukit_widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -197,7 +197,7 @@ class _FluAvatarState extends State<FluAvatar> {
 
   @override
   void initState() {
-    defaultAvatar = widgetService.getAvatar(type: widget.defaultAvatarType);
+    defaultAvatar = FluUI.getAvatar(type: widget.defaultAvatarType);
     super.initState();
   }
 

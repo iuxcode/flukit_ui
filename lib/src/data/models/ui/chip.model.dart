@@ -1,4 +1,4 @@
-import 'package:flukit_widgets/src/data/enums/image_source.dart';
+import 'package:flukit_ui/src/data/enums/image_source.dart';
 import 'package:flutter/material.dart';
 
 /// Represents a model for a chip widget.

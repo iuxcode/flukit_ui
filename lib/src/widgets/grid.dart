@@ -1,4 +1,4 @@
-import 'package:flukit_widgets/src/data/enums/grid.dart';
+import 'package:flukit_ui/src/data/enums/grid.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';

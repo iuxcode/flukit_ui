@@ -1,5 +1,5 @@
+import 'package:flukit_ui/src/widgets/divider.dart';
 import 'package:flukit_utils/flukit_utils.dart';
-import 'package:flukit_widgets/src/widgets/divider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

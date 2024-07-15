@@ -1,7 +1,7 @@
 import 'dart:io' as io;
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flukit_widgets/src/data/enums/image_source.dart';
+import 'package:flukit_ui/src/data/enums/image_source.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

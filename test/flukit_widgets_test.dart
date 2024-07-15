@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-// import 'package:flukit_widgets/flukit_widgets.dart';
+// import 'package:flukit_ui/flukit_widgets.dart';
 
 void main() {
   test('adds one to input values', () {

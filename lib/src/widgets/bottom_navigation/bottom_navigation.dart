@@ -1,16 +1,16 @@
 import 'dart:math' as math;
 
 import 'package:flukit_icons/flukit_icons.dart';
+import 'package:flukit_ui/src/data/models/ui/bottom_nav_item.dart';
+import 'package:flukit_ui/src/data/models/ui/bottom_nav_style.dart';
+import 'package:flukit_ui/src/widgets/button.dart';
 import 'package:flukit_utils/flukit_utils.dart';
-import 'package:flukit_widgets/src/data/models/ui/bottom_nav_item.dart';
-import 'package:flukit_widgets/src/data/models/ui/bottom_nav_style.dart';
-import 'package:flukit_widgets/src/widgets/button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 part './indicator.dart';
-part './utils.dart';
 part './item.dart';
+part './utils.dart';
 
 /// Creates a bottom navigation bar which is typically
 /// used as a [Scaffold]'s Scaffold.bottomNavigationBar argument.

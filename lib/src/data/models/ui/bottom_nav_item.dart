@@ -1,5 +1,5 @@
 import 'package:flukit_icons/icons.dart';
-import 'package:flukit_widgets/src/widgets/bottom_navigation/bottom_navigation.dart';
+import 'package:flukit_ui/src/widgets/bottom_navigation/bottom_navigation.dart';
 
 /// Creates an item that is used with [FluBottomNavBar].
 class FluBottomNavBarItem {

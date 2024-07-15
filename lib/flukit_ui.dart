@@ -33,14 +33,15 @@ export './src/widgets/outline.dart';
 export './src/widgets/page_view.dart';
 export './src/widgets/tabs.dart';
 
-/// Service for managing widgets using a Flukit instance.
-class WidgetService {
-  /// Widget service constructor
-  WidgetService(this.fluInstance);
+/// Manage & provide UI utilities.
+class FlukitUI {
+  /// [FlukitUI] constructor
+  FlukitUI(this.fluInstance);
 
   /// [Flukit] instance
   final Flukit fluInstance;
 }
 
-/// Service for managing widgets using a Flukit instance.
-final WidgetService widgetService = WidgetService(Flu);
+/// Manage & provide [Flukit] UI utilities.
+// ignore: non_constant_identifier_names
+final FlukitUI FluUI = FlukitUI(Flu);

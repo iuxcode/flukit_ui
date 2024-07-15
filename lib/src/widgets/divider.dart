@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 /// Provide a more customizable [Divider]
-/// TODO: add dashes and dots
+/// TODO(iuxcode): add dashes and dots
 class FluLine extends StatelessWidget {
   // ignore: public_member_api_docs
   const FluLine({

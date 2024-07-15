@@ -1,6 +1,6 @@
 import 'package:flukit_core/flukit_core.dart';
+import 'package:flukit_ui/flukit_ui.dart';
 import 'package:flukit_utils/flukit_utils.dart';
-import 'package:flukit_widgets/flukit_widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -444,7 +444,7 @@ class FluButton extends StatelessWidget {
         children: [
           button,
           Positioned.fill(
-            // Todo: Fix sizing issue
+            /// TODO(iuxcode): Fix sizing issue
             child: FluGlass(
               borderRadius: borderRadius,
               cornerRadius: cornerRadius ?? 99,
@@ -634,7 +634,7 @@ class _FluTextButton extends FluButton {
     );
 
     if (prefixIcon != null || suffixIcon != null) {
-      /// Todo: Optimize rendering conditions
+      /// Todo(iuxcode): Optimize rendering conditions
       return Row(
         mainAxisSize: MainAxisSize.min,
         children: [
