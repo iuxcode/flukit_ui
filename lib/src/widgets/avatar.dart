@@ -1,4 +1,3 @@
-import 'package:flukit_core/flukit_core.dart';
 import 'package:flukit_ui/flukit_ui.dart';
 import 'package:flukit_utils/flukit_utils.dart';
 import 'package:flutter/foundation.dart';
@@ -237,7 +236,7 @@ class _FluAvatarState extends State<FluAvatar> {
         ),
         child: widget.label != null
             ? Text(
-                Flu.textToAvatarLabel(widget.label ?? 'Flukit').toUpperCase(),
+                (widget.label ?? 'Flukit').toAvatarLabel().toUpperCase(),
                 style: TextStyle(
                   color: context.colorScheme.onPrimaryContainer,
                   fontWeight: FontWeight.bold,
