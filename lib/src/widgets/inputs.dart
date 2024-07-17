@@ -58,6 +58,8 @@ class FluTextField extends StatefulWidget {
     this.autofocus = false,
     this.maxLength,
     this.maxLengthEnforcement,
+    this.counterText,
+    this.hideCounterText = false,
   });
 
   final String? Function(String?)? validator;
@@ -104,6 +106,8 @@ class FluTextField extends StatefulWidget {
   final TextAlign textAlign;
   final TextAlignVertical textAlignVertical;
   final TextStyle? textStyle;
+  final String? counterText;
+  final bool hideCounterText;
 
   @override
   State<FluTextField> createState() => _FluTextFieldState();
@@ -456,6 +460,7 @@ class _FluTextFieldState<T extends FluTextField> extends State<T> {
                     ? const EdgeInsets.symmetric(vertical: 20)
                     : EdgeInsets.zero)
                 .copyWith(left: 15, right: 15),
+        counterText: widget.hideCounterText ? '' : widget.counterText,
       );
 
   TextStyle get _defaultTextStyle => context.textTheme.bodyMedium!
