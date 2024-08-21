@@ -11,29 +11,11 @@ export './src/data/models/ui/bottom_nav_item.dart';
 export './src/data/models/ui/bottom_nav_style.dart';
 export './src/data/models/ui/chip.model.dart';
 export './src/data/static/constants.dart';
+
 export './src/utils/ui.dart';
-export './src/widgets/avatar.dart';
-export './src/widgets/avatar_group.dart';
-export './src/widgets/badge.dart';
-export './src/widgets/bottom_navigation/bottom_navigation.dart';
-export './src/widgets/bottom_sheet.dart';
-export './src/widgets/button.dart';
-export './src/widgets/chip.dart';
-export './src/widgets/collapsible.dart';
-export './src/widgets/country_selector.dart';
-export './src/widgets/dashed_circle.dart';
-export './src/widgets/divider.dart';
-export './src/widgets/glass.dart';
-export './src/widgets/grid.dart';
-export './src/widgets/image.dart';
-export './src/widgets/inputs.dart';
-export './src/widgets/loader.dart';
-export './src/widgets/outline.dart';
-export './src/widgets/page_view.dart';
-export './src/widgets/tabs.dart';
-export 'src/screens/404.screen.dart';
-export 'src/screens/base.screen.dart';
-export 'src/screens/navigation/navigation.screen.dart';
+
+export './src/widgets/export.dart';
+export 'src/screens/export.dart';
 
 /// Manage & provide UI utilities.
 class FlukitUI {
