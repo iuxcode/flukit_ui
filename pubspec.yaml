@@ -16,6 +16,10 @@ dependencies:
       ref: v1.0.0
   flukit_icons:
     git: https://github.com/iuxcode/flukit_icons.git
+  flukit_navigation:
+    git:
+      url: https://github.com/iuxcode/flukit_navigation.git
+      ref: v1.0.0
   flukit_utils:
     git:
       url: https://github.com/iuxcode/flukit_utils.git
@@ -27,10 +31,10 @@ dependencies:
   gradient_borders: ^1.0.0
 
 dev_dependencies:
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
-  very_good_analysis: ^5.1.0
+  very_good_analysis: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

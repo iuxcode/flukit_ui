@@ -11,7 +11,6 @@ export './src/data/models/ui/bottom_nav_item.dart';
 export './src/data/models/ui/bottom_nav_style.dart';
 export './src/data/models/ui/chip.model.dart';
 export './src/data/static/constants.dart';
-export './src/screens/base.dart';
 export './src/utils/ui.dart';
 export './src/widgets/avatar.dart';
 export './src/widgets/avatar_group.dart';
@@ -32,6 +31,9 @@ export './src/widgets/loader.dart';
 export './src/widgets/outline.dart';
 export './src/widgets/page_view.dart';
 export './src/widgets/tabs.dart';
+export 'src/screens/404.screen.dart';
+export 'src/screens/base.screen.dart';
+export 'src/screens/navigation/navigation.screen.dart';
 
 /// Manage & provide UI utilities.
 class FlukitUI {
