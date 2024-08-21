@@ -196,6 +196,7 @@ class _FluNavScreenState extends State<FluNavScreen> {
   Route<dynamic>? _buildUnknownRoute(RouteSettings settings) =>
       Flu404Screen.route(settings.name);
 
+  // ignore: avoid_positional_boolean_parameters
   Future<void> onPopInvoked(bool didPop, Object? result) async {
     var cp = false;
 

@@ -1,5 +1,4 @@
 import 'package:flukit_ui/flukit_ui.dart';
-import 'package:flukit_ui/src/screens/navigation/navigation.screen.dart';
 import 'package:flutter/material.dart';
 
 /// Define a [FluNavScreen] page.
