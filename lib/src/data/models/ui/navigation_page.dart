@@ -7,12 +7,13 @@ import 'package:flutter/material.dart';
 /// be marked to true if you want the [content] to extends
 /// to the bottom of the Scaffold, instead of only extending to the top of
 /// the `bottomNavigationBar` or the `persistentFooterButtons`.
-class FluNavPage {
+class FluNavScreenPage {
   // ignore: public_member_api_docs
-  FluNavPage(this.name, this.icon, this.content, {this.extendBody = false});
+  FluNavScreenPage(this.name, this.icon, this.content,
+      {this.extendBody = false});
 
   /// page body content
-  final Widget? content;
+  final Widget content;
 
   /// if marked to `true`, the [content] will extends
   /// to the bottom of the Scaffold, instead of only extending to the top of

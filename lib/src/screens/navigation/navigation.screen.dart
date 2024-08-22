@@ -1,4 +1,5 @@
 import 'package:flukit_navigation/flukit_navigation.dart';
+import 'package:flukit_ui/flukit_ui.dart';
 import 'package:flukit_ui/src/data/models/ui/bottom_nav_item.dart';
 import 'package:flukit_ui/src/data/models/ui/bottom_nav_style.dart';
 import 'package:flukit_ui/src/data/models/ui/navigation_page.dart';
@@ -14,82 +15,8 @@ import 'package:flutter/services.dart';
 /// This screen allows you to easily create a multi-page application with a
 /// bottom navigation bar. It provides a simple way to manage the navigation
 /// between different pages and customize the appearance of the navigation bar.
-///
-/// **Example:**
-///
-/// ```dart
-/// class MyHomePage extends StatefulWidget {
-///   const MyHomePage({Key? key}) : super(key: key);
-///
-///   @override
-///   State<MyHomePage> createState() => _MyHomePageState();
-/// }
-///
-/// class _MyHomePageState extends State<MyHomePage> {
-///   @override
-///   Widget build(BuildContext context) {
-///     return FluNavScreen(
-///       pages: [
-///         FluNavPage('Home', FluIcons.home, const Text('Home Page')),
-///         FluNavPage('Profile', FluIcons.user, const Text('Profile Page')),
-///         FluNavPage('Settings', FluIcons.settings, const Text('Settings Page')),
-///       ],
-///     );
-///   }
-/// }
-/// ```
 class FluNavScreen extends StatefulWidget {
   /// Creates a [FluNavScreen] widget.
-  ///
-  /// The `pages` parameter is required and must be a list of [FluNavPage]
-  /// objects representing the pages to be displayed in the navigation bar.
-  ///
-  /// The `initialPage` parameter specifies the initial page index to be
-  /// displayed when the screen is first loaded. It defaults to `0`.
-  ///
-  /// The `navigatorKey` parameter provides access to the navigator key for the
-  /// screen.
-  ///
-  /// The `onNav` parameter is a callback function that is triggered when a
-  /// navigation bar item is tapped. It receives the index of the tapped item
-  /// as an argument.
-  ///
-  /// The `canPop` parameter determines whether the screen can be popped using
-  /// the back button. It defaults to `false`.
-  ///
-  /// The `bottomNavBarStyle` parameter is a callback function that allows you
-  /// to customize the style of the bottom navigation bar based on the current
-  /// page index.
-  ///
-  /// The `appBar` parameter allows you to specify a custom app bar widget to
-  /// be displayed at the top of the screen.
-  ///
-  /// The `overlayStyle` parameter allows you to specify a custom system UI
-  /// overlay style to be applied to the screen.
-  ///
-  /// The `floatingActionButton` parameter allows you to specify a custom
-  /// floating action button widget to be displayed on the screen.
-  ///
-  /// The `extendBody` parameter determines whether the body of the screen
-  /// should extend to the bottom of the Scaffold. It defaults to `false`.
-  ///
-  /// The `background` parameter sets the background color of the screen.
-  ///
-  /// The `floatingActionButtonLocation` parameter sets the location of the
-  /// floating action button. It defaults to
-  /// `FloatingActionButtonLocation.centerDocked`.
-  ///
-  /// The `drawer` parameter allows you to specify a custom drawer widget to be
-  /// displayed on the left side of the screen.
-  ///
-  /// The `endDrawer` parameter allows you to specify a custom end drawer widget
-  /// to be displayed on the right side of the screen.
-  ///
-  /// The `scaffoldKey` parameter provides access to the scaffold key for the
-  /// screen.
-  ///
-  /// The `drawerScrimColor` parameter sets the color of the scrim that appears
-  /// behind the drawer when it is open.
   const FluNavScreen({
     required this.pages,
     super.key,
@@ -109,6 +36,7 @@ class FluNavScreen extends StatefulWidget {
     this.endDrawer,
     this.scaffoldKey,
     this.drawerScrimColor,
+    this.hideBottomNavBar = false,
   });
 
   /// Callback function triggered when the navigation bar item is tapped.
@@ -166,12 +94,18 @@ class FluNavScreen extends StatefulWidget {
   /// The system UI overlay style to be applied to the screen.
   final SystemUiOverlayStyle? overlayStyle;
 
-  /// A list of [FluNavPage] objects representing the pages
+  /// A list of [FluNavScreenPage] objects representing the pages
   /// to be displayed in the navigation bar.
-  final List<FluNavPage> pages;
+  final List<FluNavScreenPage> pages;
 
   /// The scaffold key for the screen.
   final GlobalKey<ScaffoldState>? scaffoldKey;
+
+  /// If `true`, the bottom navigation bar will be hidden
+  ///
+  /// You must consider defining the `navigatorKey`
+  /// in order to be able to navigate.
+  final bool hideBottomNavBar;
 
   @override
   State<FluNavScreen> createState() => _FluNavScreenState();
@@ -179,120 +113,94 @@ class FluNavScreen extends StatefulWidget {
 
 class _FluNavScreenState extends State<FluNavScreen> {
   late final GlobalKey<NavigatorState> _navigatorKey;
+  late final List<FluNavScreenPage> pages;
 
-  late int _currentPage;
-  late bool _mustExtendBody;
-  late bool _canPop;
+  late int currentPage;
+  late bool mustExtendBody;
 
-  @override
-  void initState() {
-    _navigatorKey = widget.navigatorKey ?? GlobalKey<NavigatorState>();
-    _currentPage = widget.initialPage;
-    _canPop = _currentPage > 0;
-    _mustExtendBody = widget.pages[_currentPage].extendBody;
-    super.initState();
-  }
-
-  Route<dynamic>? _buildUnknownRoute(RouteSettings settings) =>
-      Flu404Screen.route(settings.name);
-
-  // ignore: avoid_positional_boolean_parameters
-  Future<void> onPopInvoked(bool didPop, Object? result) async {
-    var cp = false;
-
-    if (!didPop && !widget.canPop && _currentPage != 0) {
-      for (var i = _currentPage - 1; i >= 0; i--) {
-        if (widget.pages[i].content != null) {
-          await _navigateTo(context, i);
-          break;
-        }
-      }
-    } else {
-      cp = true;
-    }
-
-    setState(() => _canPop = cp);
-  }
-
-  Route<dynamic>? _onGenerateRoute(RouteSettings settings) {
-    final name = settings.name;
-    final index = widget.pages
-        .indexWhere((page) => page.path == name && page.content != null);
-
-    if (index > -1) {
-      final content = widget.pages[index].content!;
-
-      return PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            (index > _currentPage)
-                ? SlideRightTransition().buildTransitions(
-                    context,
-                    animation,
-                    secondaryAnimation,
-                    content,
-                  )
-                : SlideLeftTransition().buildTransitions(
-                    context,
-                    animation,
-                    secondaryAnimation,
-                    content,
-                  ),
-        settings: settings,
-      );
-    }
-
-    return _buildUnknownRoute(settings);
-  }
-
-  Future<void> _navigateTo(BuildContext context, int index) async {
+  void navigateTo(int index) {
     final page = widget.pages[index];
 
-    if (index != _currentPage && page.content != null) {
-      await _navigatorKey.currentState?.pushNamed(page.path);
+    if (index != currentPage) {
+      _navigatorKey.currentState?.pushNamed(page.path);
     }
 
     setState(() {
-      _currentPage = index;
-      _mustExtendBody = widget.pages[index].extendBody;
+      currentPage = index;
+      mustExtendBody = widget.pages[index].extendBody;
     });
 
     widget.onNav?.call(index);
   }
 
+  Route<dynamic>? buildUnknownRoute(RouteSettings settings) =>
+      Flu404Screen.route(settings.name);
+
+  Route<dynamic>? onGenerateRoute(RouteSettings settings) {
+    final page = pages.firstWhereOrNull((page) => page.path == settings.name);
+
+    if (page != null) {
+      return PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return SlideRightTransition().buildTransitions(
+            context,
+            animation,
+            secondaryAnimation,
+            page.content,
+          );
+        },
+        settings: RouteSettings(
+          name: page.name,
+        ),
+      );
+    } else {
+      return buildUnknownRoute(settings);
+    }
+  }
+
   @override
-  Widget build(BuildContext context) => PopScope(
-        canPop: _canPop,
-        onPopInvokedWithResult: onPopInvoked,
-        child: FluScreen(
-          overlayStyle: context.systemUiOverlayStyle
-              .copyWith(statusBarColor: Colors.transparent),
-          key: widget.scaffoldKey,
-          background: widget.background,
-          extendBody: widget.extendBody ?? _mustExtendBody,
-          appBar: widget.appBar,
-          floatingActionButtonLocation: widget.floatingActionButtonLocation,
-          floatingActionButton: widget.floatingActionButton,
-          drawer: widget.drawer,
-          endDrawer: widget.endDrawer,
-          drawerScrimColor: widget.drawerScrimColor,
-          body: Navigator(
-            key: _navigatorKey,
-            restorationScopeId: 'MainScreenNav',
-            initialRoute: widget.pages[0].path,
-            onGenerateRoute: _onGenerateRoute,
-            onUnknownRoute: _buildUnknownRoute,
-          ),
-          bottomNavigationBar: FluBottomNavBar(
-            index: _currentPage,
-            onItemTap: (index) async {
-              await _navigateTo(context, index);
-            },
+  void initState() {
+    _navigatorKey = widget.navigatorKey ?? GlobalKey<NavigatorState>();
+    pages = widget.pages;
+    currentPage = widget.initialPage;
+    mustExtendBody = widget.pages[currentPage].extendBody;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final Widget? bottomNavigationBar = widget.hideBottomNavBar
+        ? null
+        : FluBottomNavBar(
+            index: currentPage,
+            onItemTap: navigateTo,
             items: widget.pages
                 .map((page) => FluBottomNavBarItem(page.icon, page.name))
                 .toList(),
-            style: widget.bottomNavBarStyle?.call(_currentPage) ??
+            style: widget.bottomNavBarStyle?.call(currentPage) ??
                 const FluBottomNavBarStyle(),
-          ),
-        ),
-      );
+          );
+
+    return FluScreen(
+      body: Navigator(
+        key: _navigatorKey,
+        restorationScopeId: 'MainScreenNav',
+        initialRoute: widget.pages[0].path,
+        onGenerateRoute: onGenerateRoute,
+        onUnknownRoute: buildUnknownRoute,
+      ),
+      bottomNavigationBar: bottomNavigationBar,
+      overlayStyle: context.systemUiOverlayStyle
+          .copyWith(statusBarColor: Colors.transparent),
+      key: widget.scaffoldKey,
+      background: widget.background,
+      extendBody: widget.extendBody ?? mustExtendBody,
+      appBar: widget.appBar,
+      floatingActionButtonLocation: widget.floatingActionButtonLocation,
+      floatingActionButton: widget.floatingActionButton,
+      drawer: widget.drawer,
+      endDrawer: widget.endDrawer,
+      drawerScrimColor: widget.drawerScrimColor,
+    );
+  }
 }
