@@ -256,7 +256,7 @@ class _FluAvatarState extends State<FluAvatar> {
         image,
         imageSource:
             mustLoadDefaultAvatar ? ImageSources.asset : widget.imageSource,
-        package: mustLoadDefaultAvatar ? 'flukit' : widget.package,
+        package: mustLoadDefaultAvatar ? 'flukit_ui' : widget.package,
         circle: _isCircle,
         cornerRadius: widget.cornerRadius,
         height: widget.size,
