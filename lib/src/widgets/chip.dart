@@ -245,8 +245,8 @@ class _FluChipsState extends State<FluChips> {
   }
 
   @override
-  Future<void> didUpdateWidget(covariant FluChips oldWidget) async {
-    await initScroll();
+  void didUpdateWidget(covariant FluChips oldWidget) {
+    initScroll();
     super.didUpdateWidget(oldWidget);
   }
 
