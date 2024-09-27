@@ -246,7 +246,7 @@ class _FluChipsState extends State<FluChips> {
 
   @override
   void didUpdateWidget(covariant FluChips oldWidget) {
-    initScroll();
+    if (widget.isScrollable) initScroll();
     super.didUpdateWidget(oldWidget);
   }
 
@@ -254,7 +254,9 @@ class _FluChipsState extends State<FluChips> {
   void initState() {
     scrollController = widget.scrollController ?? ScrollController();
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async => initScroll());
+    if (widget.isScrollable) {
+      WidgetsBinding.instance.addPostFrameCallback((_) async => initScroll());
+    }
   }
 
   Future<void> initScroll() async => scrollController.animateTo(
