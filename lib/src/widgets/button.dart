@@ -452,7 +452,7 @@ class FluButton extends StatelessWidget {
               intensity: 1,
               child: ColoredBox(
                 color: loaderOverlayColor ??
-                    defaultOverlayColor.withValues(alpha: filled ? .15 : .55),
+                    defaultOverlayColor.withOpacity(filled ? .15 : .55),
                 child: loader,
               ),
             ),

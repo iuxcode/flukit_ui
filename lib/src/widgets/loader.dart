@@ -136,7 +136,7 @@ class _FluLoaderState extends State<FluLoader>
       FluArc(
         numberOfDashes: 4,
         angle: layerAngle,
-        color: color.withValues(alpha: .35),
+        color: color.withOpacity(.35),
         size: widget.size,
         strokeWidth: widget.strokeWidth,
       ),

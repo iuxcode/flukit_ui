@@ -265,13 +265,13 @@ class FluImage extends StatelessWidget {
                 color: gradientOverlay
                     ? null
                     : (overlayColor ?? Colors.black)
-                        .withValues(alpha: overlayOpacity),
+                        .withOpacity(overlayOpacity),
                 gradient: gradientOverlay
                     ? LinearGradient(
                         colors: [
                           Colors.transparent,
                           (overlayColor ?? Colors.black)
-                              .withValues(alpha: overlayOpacity),
+                              .withOpacity(overlayOpacity),
                         ],
                         begin: gradientOverlayBegin,
                         end: gradientOverlayEnd,

@@ -437,13 +437,12 @@ class FluChip extends StatelessWidget {
           color: chip.outlined
               ? Colors.transparent
               : chip.color ??
-                  context.colorScheme.surfaceContainer.withValues(alpha: .65),
+                  context.colorScheme.surfaceContainer.withOpacity(.65),
           border: chip.outlined
               ? Border.all(
                   width: chip.strokeWidth,
                   color: chip.color ??
-                      context.colorScheme.surfaceContainer
-                          .withValues(alpha: .65),
+                      context.colorScheme.surfaceContainer.withOpacity(.65),
                 )
               : null,
           borderRadius: BorderRadius.circular(height * 2),
