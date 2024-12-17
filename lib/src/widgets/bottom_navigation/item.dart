@@ -9,6 +9,8 @@ class _NavItem extends StatelessWidget {
     required this.iconSize,
     required this.iconStyle,
     required this.iconStrokeWidth,
+    required this.showLabel,
+    required this.gap,
     super.key,
   });
 
@@ -18,6 +20,8 @@ class _NavItem extends StatelessWidget {
   final double iconStrokeWidth;
   final FluBottomNavBarItem item;
   final VoidCallback onTap;
+  final bool showLabel;
+  final double gap;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -45,15 +49,30 @@ class _NavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Expanded(
-        child: FluButton.icon(
-          item.icon,
-          onPressed: onTap,
-          iconSize: iconSize,
-          iconStyle: iconStyle,
-          iconStrokeWidth: iconStrokeWidth,
-          color: Colors.transparent,
-          foregroundColor: color,
-          size: double.infinity,
-        ),
+        child: showLabel
+            ? FluButton.text(
+                item.label,
+                prefixIcon: item.icon,
+                onPressed: onTap,
+                iconSize: iconSize,
+                iconStyle: iconStyle,
+                iconStrokeWidth: iconStrokeWidth,
+                color: Colors.transparent,
+                foregroundColor: color,
+                height: double.infinity,
+                width: double.infinity,
+                alignmentAxis: Axis.vertical,
+                gap: gap,
+              )
+            : FluButton.icon(
+                item.icon,
+                onPressed: onTap,
+                iconSize: iconSize,
+                iconStyle: iconStyle,
+                iconStrokeWidth: iconStrokeWidth,
+                color: Colors.transparent,
+                foregroundColor: color,
+                size: double.infinity,
+              ),
       );
 }

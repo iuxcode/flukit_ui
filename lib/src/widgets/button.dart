@@ -113,6 +113,7 @@ class FluButton extends StatelessWidget {
     BorderSide? border,
     InteractiveInkFeatureFactory? splashFactory,
     bool spaceBetweenChildren,
+    Axis alignmentAxis,
   }) = _FluTextButton;
 
   /// The alignment of the button's content
@@ -599,6 +600,7 @@ class _FluTextButton extends FluButton {
     super.splashFactory,
     this.iconColor,
     this.spaceBetweenChildren = false,
+    this.alignmentAxis = Axis.horizontal,
   }) : super(child: const SizedBox());
 
   final double gap;
@@ -613,6 +615,7 @@ class _FluTextButton extends FluButton {
   final double? suffixIconSize;
   final String text;
   final TextStyle? textStyle;
+  final Axis alignmentAxis;
 
   @override
   Widget _getChild(BuildContext context) {
@@ -635,33 +638,40 @@ class _FluTextButton extends FluButton {
 
     if (prefixIcon != null || suffixIcon != null) {
       /// Todo(iuxcode): Optimize rendering conditions
-      return Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (prefixIcon != null)
-            _buildIcon(
-              prefixIcon!,
-              iconColor ?? foregroundColor,
-              prefixIconSize,
-            ),
-          if (spaceBetweenChildren && prefixIcon != null && suffixIcon != null)
-            const Spacer(),
-          if (spaceBetweenChildren &&
-              (prefixIcon != null && suffixIcon == null ||
-                  prefixIcon == null && suffixIcon != null))
-            Expanded(child: textWidget)
-          else
-            Flexible(child: textWidget),
-          if (spaceBetweenChildren && suffixIcon != null && prefixIcon != null)
-            const Spacer(),
-          if (suffixIcon != null)
-            _buildIcon(
-              suffixIcon!,
-              iconColor ?? foregroundColor,
-              suffixIconSize,
-            ),
-        ],
-      );
+      final children = [
+        if (prefixIcon != null)
+          _buildIcon(
+            prefixIcon!,
+            iconColor ?? foregroundColor,
+            prefixIconSize,
+          ),
+        if (spaceBetweenChildren && prefixIcon != null && suffixIcon != null)
+          const Spacer(),
+        if (spaceBetweenChildren &&
+            (prefixIcon != null && suffixIcon == null ||
+                prefixIcon == null && suffixIcon != null))
+          Expanded(child: textWidget)
+        else
+          Flexible(child: textWidget),
+        if (spaceBetweenChildren && suffixIcon != null && prefixIcon != null)
+          const Spacer(),
+        if (suffixIcon != null)
+          _buildIcon(
+            suffixIcon!,
+            iconColor ?? foregroundColor,
+            suffixIconSize,
+          ),
+      ];
+
+      return alignmentAxis == Axis.horizontal
+          ? Row(
+              mainAxisSize: MainAxisSize.min,
+              children: children,
+            )
+          : Column(
+              mainAxisSize: MainAxisSize.min,
+              children: children,
+            );
     }
 
     return textWidget;

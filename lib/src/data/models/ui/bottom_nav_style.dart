@@ -18,6 +18,8 @@ class FluBottomNavBarStyle {
     this.border,
     this.iconStyle = FluIconStyles.twotone,
     this.selectedIconStyle,
+    this.showLabels = false,
+    this.labelGap = 8,
   });
 
   /// Color of the [FluBottomNavBar]
@@ -56,4 +58,10 @@ class FluBottomNavBarStyle {
 
   /// Color for unselected icons
   final Color? unSelectedForegroundColor;
+
+  /// Either to show labels under icons or not
+  final bool showLabels;
+
+  /// Space between icon and label
+  final double labelGap;
 }

@@ -148,6 +148,8 @@ class _FluBottomNavBarState extends State<FluBottomNavBar> {
             iconStyle: isSelected && widget.style.selectedIconStyle != null
                 ? widget.style.selectedIconStyle!
                 : widget.style.iconStyle,
+            showLabel: widget.style.showLabels,
+            gap: widget.style.labelGap,
           );
         }).toList(),
       ),
