@@ -507,7 +507,7 @@ class _FluTextFieldState<T extends FluTextField> extends State<T> {
         border: widget.borderWidth != null
             ? Border.all(
                 color: widget.borderColor ??
-                    context.colorScheme.surface.withOpacity(.05),
+                    context.colorScheme.surface.withValues(alpha: .05),
                 width: widget.borderWidth!,
               )
             : null,

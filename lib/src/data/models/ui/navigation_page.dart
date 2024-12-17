@@ -9,8 +9,12 @@ import 'package:flutter/material.dart';
 /// the `bottomNavigationBar` or the `persistentFooterButtons`.
 class FluNavScreenPage {
   // ignore: public_member_api_docs
-  FluNavScreenPage(this.name, this.icon, this.content,
-      {this.extendBody = false});
+  FluNavScreenPage(
+    this.name,
+    this.icon,
+    this.content, {
+    this.extendBody = false,
+  });
 
   /// page body content
   final Widget content;

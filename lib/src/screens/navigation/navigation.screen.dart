@@ -1,11 +1,5 @@
 import 'package:flukit_navigation/flukit_navigation.dart';
 import 'package:flukit_ui/flukit_ui.dart';
-import 'package:flukit_ui/src/data/models/ui/bottom_nav_item.dart';
-import 'package:flukit_ui/src/data/models/ui/bottom_nav_style.dart';
-import 'package:flukit_ui/src/data/models/ui/navigation_page.dart';
-import 'package:flukit_ui/src/screens/404.screen.dart';
-import 'package:flukit_ui/src/screens/base.screen.dart';
-import 'package:flukit_ui/src/widgets/bottom_navigation/bottom_navigation.dart';
 import 'package:flukit_utils/flukit_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
