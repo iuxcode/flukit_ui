@@ -754,10 +754,15 @@ class _FluTextButton extends FluButton {
         size: size ?? iconSize,
         strokeWidth: iconStrokeWidth,
         color: color,
-        margin: EdgeInsets.only(
-          right: prefixIcon != null && !spaceBetweenChildren ? gap : 0,
-          left: suffixIcon != null && !spaceBetweenChildren ? gap : 0,
-        ),
+        margin: alignmentAxis == Axis.horizontal
+            ? EdgeInsets.only(
+                right: prefixIcon != null && !spaceBetweenChildren ? gap : 0,
+                left: suffixIcon != null && !spaceBetweenChildren ? gap : 0,
+              )
+            : EdgeInsets.only(
+                bottom: prefixIcon != null && !spaceBetweenChildren ? gap : 0,
+                top: suffixIcon != null && !spaceBetweenChildren ? gap : 0,
+              ),
       );
 }
 
