@@ -1,35 +1,52 @@
-/// TODO(iuxcode): Rewrite to use `FluTextField`
-// ignore_for_file: public_member_api_docs
-
 import 'package:flukit_icons/flukit_icons.dart';
 import 'package:flukit_utils/flukit_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-/// A `Flukit` styled [TextField].
+/// Customizable and stylized text input field using Flukit styling.
 ///
-/// This is a convenience widget that wraps a [TextField] widget in a
-/// [Container] for more styling options.
+/// `FluTextField` supports features like custom icons, expandable height,
+/// loading states (with a suffix loader), maximum height constraints with scrolling,
+/// focus management, and dynamic theming using your app's `ColorScheme` and `TextTheme`.
+///
+/// This widget aims to provide a visually polished, flexible, and extensible text input
+/// without breaking Material Design rules while still being lighter and easy to maintain.
 class FluTextField extends StatefulWidget {
+  /// Creates a `FluTextField` instance.
+  ///
+  /// [hint] is required and displays a placeholder text.
   const FluTextField({
-    required this.hint,
     super.key,
+    required this.hint,
     this.inputController,
     this.focusNode,
     this.inputFormatters,
     this.validator,
     this.onChanged,
-    this.expand = false,
-    this.textStyle,
-    this.selectionControls,
+    this.onFieldSubmitted,
     this.onTap,
-    this.height,
+    this.selectionControls,
+    this.expand = false,
+    this.obscureText = false,
+    this.autofocus = false,
     this.margin = EdgeInsets.zero,
     this.padding,
     this.fillColor,
-    this.boxShadow,
+    this.borderColor,
+    this.borderRadius,
+    this.cornerRadius,
     this.borderWidth,
+    this.boxShadow,
+    this.color,
+    this.cursorColor,
+    this.cursorHeight,
+    this.cursorWidth = 2.0,
+    this.textStyle,
+    this.hintStyle,
+    this.hintColor,
+    this.prefix,
+    this.suffix,
     this.prefixIcon,
     this.suffixIcon,
     this.iconColor,
@@ -39,524 +56,341 @@ class FluTextField extends StatefulWidget {
     this.textAlign = TextAlign.start,
     this.textAlignVertical = TextAlignVertical.center,
     this.keyboardType,
-    this.color,
-    this.cursorColor,
-    this.cursorHeight,
-    this.cursorWidth = 2.0,
-    this.hintStyle,
-    this.borderColor,
-    this.borderRadius,
-    this.cornerRadius,
-    this.hintColor,
     this.inputAction = TextInputAction.done,
-    this.maxlines,
-    this.obscureText = false,
-    this.maxHeight,
-    this.prefix,
-    this.suffix,
-    this.onFieldSubmitted,
-    this.autofocus = false,
+    this.maxLines,
     this.maxLength,
     this.maxLengthEnforcement,
     this.counterText,
     this.hideCounterText = false,
+    this.maxHeight,
+    this.showScrollbar = true,
+    this.isLoading = false,
   });
 
-  final String? Function(String?)? validator;
-  final void Function(String)? onChanged;
-  final void Function(String)? onFieldSubmitted;
-  final bool autofocus;
-  final Color? borderColor;
-  final BorderRadius? borderRadius;
-  final double? borderWidth;
-  final List<BoxShadow>? boxShadow;
-  final Color? color;
-  final double? cornerRadius;
-  final Color? cursorColor;
-  final double? cursorHeight;
-  final double cursorWidth;
-  final bool expand;
-  final Color? fillColor;
-  final FocusNode? focusNode;
-  final double? height;
+  /// The hint text displayed when the field is empty.
   final String hint;
-  final Color? hintColor;
-  final TextStyle? hintStyle;
-  final Color? iconColor;
-  final double iconSize;
-  final double iconStrokeWidth;
-  final FluIconStyles iconStyle;
-  final TextInputAction inputAction;
+
+  /// Controller for the text being edited.
   final TextEditingController? inputController;
+
+  /// Focus node for controlling the focus manually.
+  final FocusNode? focusNode;
+
+  /// List of input formatters to apply to the text field.
   final List<TextInputFormatter>? inputFormatters;
-  final TextInputType? keyboardType;
-  final EdgeInsets margin;
-  final double? maxHeight;
-  final int? maxLength;
-  final MaxLengthEnforcement? maxLengthEnforcement;
-  final int? maxlines;
-  final bool obscureText;
+
+  /// Validator function for form validation.
+  final String? Function(String?)? validator;
+
+  /// Called when the field's value changes.
+  final void Function(String)? onChanged;
+
+  /// Called when the user submits the field (e.g., presses Enter).
+  final void Function(String)? onFieldSubmitted;
+
+  /// Called when the field is tapped.
   final VoidCallback? onTap;
-  final EdgeInsets? padding;
-  final Widget? prefix;
+
+  /// Provides custom text selection controls (e.g., copy, paste).
   final TextSelectionControls? selectionControls;
-  final Widget? suffix;
-  final FluIcons? prefixIcon;
-  final FluIcons? suffixIcon;
-  final TextAlign textAlign;
-  final TextAlignVertical textAlignVertical;
+
+  /// Whether the field should expand vertically infinitely.
+  final bool expand;
+
+  /// Whether the field should obscure the text (for passwords).
+  final bool obscureText;
+
+  /// Whether the field should autofocus on screen load.
+  final bool autofocus;
+
+  /// Margin around the entire field.
+  final EdgeInsets margin;
+
+  /// Inner padding between the text and the field border.
+  final EdgeInsets? padding;
+
+  /// Custom fill color for the background.
+  final Color? fillColor;
+
+  /// Border color if a border is applied.
+  final Color? borderColor;
+
+  /// Custom border radius if you want to override the default rounded corners.
+  final BorderRadius? borderRadius;
+
+  /// Border width if you want to apply a border.
+  final double? borderWidth;
+
+  /// Corner radius (used if no custom `borderRadius` is provided).
+  final double? cornerRadius;
+
+  /// Box shadow to apply around the field container.
+  final List<BoxShadow>? boxShadow;
+
+  /// Text color override.
+  final Color? color;
+
+  /// Custom cursor color.
+  final Color? cursorColor;
+
+  /// Custom cursor height.
+  final double? cursorHeight;
+
+  /// Custom cursor width.
+  final double cursorWidth;
+
+  /// Custom text style override.
   final TextStyle? textStyle;
+
+  /// Custom hint style override.
+  final TextStyle? hintStyle;
+
+  /// Custom hint text color override.
+  final Color? hintColor;
+
+  /// A custom widget placed before the text input (higher priority than prefixIcon).
+  final Widget? prefix;
+
+  /// A custom widget placed after the text input (higher priority than suffixIcon).
+  final Widget? suffix;
+
+  /// A Flukit icon to place as a prefix.
+  final FluIcons? prefixIcon;
+
+  /// A Flukit icon to place as a suffix.
+  final FluIcons? suffixIcon;
+
+  /// Color for the icons (prefix/suffix).
+  final Color? iconColor;
+
+  /// Size for prefix and suffix icons.
+  final double iconSize;
+
+  /// Stroke width for Flukit icons.
+  final double iconStrokeWidth;
+
+  /// Style for Flukit icons.
+  final FluIconStyles iconStyle;
+
+  /// How the text should be aligned horizontally.
+  final TextAlign textAlign;
+
+  /// How the text should be aligned vertically.
+  final TextAlignVertical textAlignVertical;
+
+  /// The type of keyboard to use for editing the text.
+  final TextInputType? keyboardType;
+
+  /// The action button on the soft keyboard.
+  final TextInputAction inputAction;
+
+  /// Maximum number of lines allowed.
+  final int? maxLines;
+
+  /// Maximum number of characters allowed.
+  final int? maxLength;
+
+  /// How to enforce maxLength (e.g., truncate or prevent).
+  final MaxLengthEnforcement? maxLengthEnforcement;
+
+  /// Custom counter text under the field.
   final String? counterText;
+
+  /// Hide the character counter.
   final bool hideCounterText;
+
+  /// Maximum height for the field before scrolling inside.
+  final double? maxHeight;
+
+  /// Whether to show a scrollbar when scrolling.
+  final bool showScrollbar;
+
+  /// Whether to display a loading indicator instead of the suffix.
+  final bool isLoading;
 
   @override
   State<FluTextField> createState() => _FluTextFieldState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(
-        ObjectFlagProperty<String? Function(String? p1)?>.has(
-          'validator',
-          validator,
-        ),
-      )
-      ..add(
-        ObjectFlagProperty<void Function(String p1)?>.has(
-          'onChanged',
-          onChanged,
-        ),
-      )
-      ..add(ColorProperty('borderColor', borderColor))
-      ..add(DiagnosticsProperty<BorderRadius?>('borderRadius', borderRadius))
-      ..add(DoubleProperty('borderWidth', borderWidth))
-      ..add(IterableProperty<BoxShadow>('boxShadow', boxShadow))
-      ..add(ColorProperty('color', color))
-      ..add(DoubleProperty('cornerRadius', cornerRadius))
-      ..add(ColorProperty('cursorColor', cursorColor))
-      ..add(DoubleProperty('cursorHeight', cursorHeight))
-      ..add(DoubleProperty('cursorWidth', cursorWidth))
-      ..add(DiagnosticsProperty<bool>('expand', expand))
-      ..add(ColorProperty('fillColor', fillColor))
-      ..add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode))
-      ..add(DoubleProperty('height', height))
-      ..add(StringProperty('hint', hint))
-      ..add(ColorProperty('iconColor', iconColor))
-      ..add(DoubleProperty('iconSize', iconSize))
-      ..add(DoubleProperty('iconStrokeWidth', iconStrokeWidth))
-      ..add(EnumProperty<FluIconStyles>('iconStyle', iconStyle))
-      ..add(EnumProperty<TextInputAction>('inputAction', inputAction))
-      ..add(
-        DiagnosticsProperty<TextEditingController?>(
-          'inputController',
-          inputController,
-        ),
-      )
-      ..add(
-        IterableProperty<TextInputFormatter>(
-          'inputFormatters',
-          inputFormatters,
-        ),
-      )
-      ..add(DiagnosticsProperty<TextInputType?>('keyboardType', keyboardType))
-      ..add(ColorProperty('hintColor', hintColor))
-      ..add(DiagnosticsProperty<TextStyle?>('hintStyle', hintStyle))
-      ..add(DiagnosticsProperty<EdgeInsets>('margin', margin))
-      ..add(DoubleProperty('maxHeight', maxHeight))
-      ..add(IntProperty('maxlines', maxlines))
-      ..add(DiagnosticsProperty<bool>('obscureText', obscureText))
-      ..add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap))
-      ..add(DiagnosticsProperty<EdgeInsets?>('padding', padding))
-      ..add(
-        DiagnosticsProperty<TextSelectionControls?>(
-          'selectionControls',
-          selectionControls,
-        ),
-      )
-      ..add(EnumProperty<FluIcons?>('prefixIcon', prefixIcon))
-      ..add(EnumProperty<FluIcons?>('suffixIcon', suffixIcon))
-      ..add(EnumProperty<TextAlign>('textAlign', textAlign))
-      ..add(
-        DiagnosticsProperty<TextAlignVertical>(
-          'textAlignVertical',
-          textAlignVertical,
-        ),
-      )
-      ..add(DiagnosticsProperty<TextStyle?>('textStyle', textStyle))
-      ..add(
-        ObjectFlagProperty<void Function(String p1)?>.has(
-          'onFieldSubmitted',
-          onFieldSubmitted,
-        ),
-      )
-      ..add(DiagnosticsProperty<bool>('autofocus', autofocus))
-      ..add(IntProperty('maxLength', maxLength))
-      ..add(
-        EnumProperty<MaxLengthEnforcement?>(
-          'maxLengthEnforcement',
-          maxLengthEnforcement,
-        ),
-      )
-      ..add(
-        ObjectFlagProperty<void Function(String p1)?>.has(
-          'onChanged',
-          onChanged,
-        ),
-      )
-      ..add(ColorProperty('borderColor', borderColor))
-      ..add(DiagnosticsProperty<BorderRadius?>('borderRadius', borderRadius))
-      ..add(DoubleProperty('borderWidth', borderWidth))
-      ..add(IterableProperty<BoxShadow>('boxShadow', boxShadow))
-      ..add(ColorProperty('color', color))
-      ..add(DoubleProperty('cornerRadius', cornerRadius))
-      ..add(ColorProperty('cursorColor', cursorColor))
-      ..add(DoubleProperty('cursorHeight', cursorHeight))
-      ..add(DoubleProperty('cursorWidth', cursorWidth))
-      ..add(DiagnosticsProperty<bool>('expand', expand))
-      ..add(ColorProperty('fillColor', fillColor))
-      ..add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode))
-      ..add(DoubleProperty('height', height))
-      ..add(StringProperty('hint', hint))
-      ..add(ColorProperty('iconColor', iconColor))
-      ..add(DoubleProperty('iconSize', iconSize))
-      ..add(DoubleProperty('iconStrokeWidth', iconStrokeWidth))
-      ..add(EnumProperty<FluIconStyles>('iconStyle', iconStyle))
-      ..add(EnumProperty<TextInputAction>('inputAction', inputAction))
-      ..add(
-        DiagnosticsProperty<TextEditingController?>(
-          'inputController',
-          inputController,
-        ),
-      )
-      ..add(
-        IterableProperty<TextInputFormatter>(
-          'inputFormatters',
-          inputFormatters,
-        ),
-      )
-      ..add(DiagnosticsProperty<TextInputType?>('keyboardType', keyboardType))
-      ..add(ColorProperty('hintColor', hintColor))
-      ..add(DiagnosticsProperty<TextStyle?>('hintStyle', hintStyle))
-      ..add(DiagnosticsProperty<EdgeInsets>('margin', margin))
-      ..add(DoubleProperty('maxHeight', maxHeight))
-      ..add(IntProperty('maxlines', maxlines))
-      ..add(DiagnosticsProperty<bool>('obscureText', obscureText))
-      ..add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap))
-      ..add(DiagnosticsProperty<EdgeInsets?>('padding', padding))
-      ..add(
-        DiagnosticsProperty<TextSelectionControls?>(
-          'selectionControls',
-          selectionControls,
-        ),
-      )
-      ..add(EnumProperty<FluIcons?>('prefixIcon', prefixIcon))
-      ..add(EnumProperty<FluIcons?>('suffixIcon', suffixIcon))
-      ..add(EnumProperty<TextAlign>('textAlign', textAlign))
-      ..add(
-        DiagnosticsProperty<TextAlignVertical>(
-          'textAlignVertical',
-          textAlignVertical,
-        ),
-      )
-      ..add(DiagnosticsProperty<TextStyle?>('textStyle', textStyle))
-      ..add(
-        ObjectFlagProperty<void Function(String p1)?>.has(
-          'onFieldSubmitted',
-          onFieldSubmitted,
-        ),
-      )
-      ..add(DiagnosticsProperty<bool>('autofocus', autofocus))
-      ..add(IntProperty('maxLength', maxLength))
-      ..add(
-        EnumProperty<MaxLengthEnforcement?>(
-          'maxLengthEnforcement',
-          maxLengthEnforcement,
-        ),
-      )
-      ..add(
-        ObjectFlagProperty<void Function(String p1)?>.has(
-          'onChanged',
-          onChanged,
-        ),
-      )
-      ..add(ColorProperty('borderColor', borderColor))
-      ..add(DiagnosticsProperty<BorderRadius?>('borderRadius', borderRadius))
-      ..add(DoubleProperty('borderWidth', borderWidth))
-      ..add(IterableProperty<BoxShadow>('boxShadow', boxShadow))
-      ..add(ColorProperty('color', color))
-      ..add(DoubleProperty('cornerRadius', cornerRadius))
-      ..add(ColorProperty('cursorColor', cursorColor))
-      ..add(DoubleProperty('cursorHeight', cursorHeight))
-      ..add(DoubleProperty('cursorWidth', cursorWidth))
-      ..add(DiagnosticsProperty<bool>('expand', expand))
-      ..add(ColorProperty('fillColor', fillColor))
-      ..add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode))
-      ..add(DoubleProperty('height', height))
-      ..add(StringProperty('hint', hint))
-      ..add(ColorProperty('iconColor', iconColor))
-      ..add(DoubleProperty('iconSize', iconSize))
-      ..add(DoubleProperty('iconStrokeWidth', iconStrokeWidth))
-      ..add(EnumProperty<FluIconStyles>('iconStyle', iconStyle))
-      ..add(EnumProperty<TextInputAction>('inputAction', inputAction))
-      ..add(
-        DiagnosticsProperty<TextEditingController?>(
-          'inputController',
-          inputController,
-        ),
-      )
-      ..add(
-        IterableProperty<TextInputFormatter>(
-          'inputFormatters',
-          inputFormatters,
-        ),
-      )
-      ..add(DiagnosticsProperty<TextInputType?>('keyboardType', keyboardType))
-      ..add(ColorProperty('hintColor', hintColor))
-      ..add(DiagnosticsProperty<TextStyle?>('hintStyle', hintStyle))
-      ..add(DiagnosticsProperty<EdgeInsets>('margin', margin))
-      ..add(DoubleProperty('maxHeight', maxHeight))
-      ..add(IntProperty('maxlines', maxlines))
-      ..add(DiagnosticsProperty<bool>('obscureText', obscureText))
-      ..add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap))
-      ..add(DiagnosticsProperty<EdgeInsets?>('padding', padding))
-      ..add(
-        DiagnosticsProperty<TextSelectionControls?>(
-          'selectionControls',
-          selectionControls,
-        ),
-      )
-      ..add(EnumProperty<FluIcons?>('prefixIcon', prefixIcon))
-      ..add(EnumProperty<FluIcons?>('suffixIcon', suffixIcon))
-      ..add(EnumProperty<TextAlign>('textAlign', textAlign))
-      ..add(
-        DiagnosticsProperty<TextAlignVertical>(
-          'textAlignVertical',
-          textAlignVertical,
-        ),
-      )
-      ..add(DiagnosticsProperty<TextStyle?>('textStyle', textStyle))
-      ..add(
-        ObjectFlagProperty<void Function(String p1)?>.has(
-          'onFieldSubmitted',
-          onFieldSubmitted,
-        ),
-      )
-      ..add(DiagnosticsProperty<bool>('autofocus', autofocus))
-      ..add(IntProperty('maxLength', maxLength))
-      ..add(
-        EnumProperty<MaxLengthEnforcement?>(
-          'maxLengthEnforcement',
-          maxLengthEnforcement,
-        ),
-      )
-      ..add(
-        ObjectFlagProperty<void Function(String p1)?>.has(
-          'onChanged',
-          onChanged,
-        ),
-      )
-      ..add(ColorProperty('borderColor', borderColor))
-      ..add(DiagnosticsProperty<BorderRadius?>('borderRadius', borderRadius))
-      ..add(DoubleProperty('borderWidth', borderWidth))
-      ..add(IterableProperty<BoxShadow>('boxShadow', boxShadow))
-      ..add(ColorProperty('color', color))
-      ..add(DoubleProperty('cornerRadius', cornerRadius))
-      ..add(ColorProperty('cursorColor', cursorColor))
-      ..add(DoubleProperty('cursorHeight', cursorHeight))
-      ..add(DoubleProperty('cursorWidth', cursorWidth))
-      ..add(DiagnosticsProperty<bool>('expand', expand))
-      ..add(ColorProperty('fillColor', fillColor))
-      ..add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode))
-      ..add(DoubleProperty('height', height))
-      ..add(StringProperty('hint', hint))
-      ..add(ColorProperty('iconColor', iconColor))
-      ..add(DoubleProperty('iconSize', iconSize))
-      ..add(DoubleProperty('iconStrokeWidth', iconStrokeWidth))
-      ..add(EnumProperty<FluIconStyles>('iconStyle', iconStyle))
-      ..add(EnumProperty<TextInputAction>('inputAction', inputAction))
-      ..add(
-        DiagnosticsProperty<TextEditingController?>(
-          'inputController',
-          inputController,
-        ),
-      )
-      ..add(
-        IterableProperty<TextInputFormatter>(
-          'inputFormatters',
-          inputFormatters,
-        ),
-      )
-      ..add(DiagnosticsProperty<TextInputType?>('keyboardType', keyboardType))
-      ..add(ColorProperty('hintColor', hintColor))
-      ..add(DiagnosticsProperty<TextStyle?>('hintStyle', hintStyle))
-      ..add(DiagnosticsProperty<EdgeInsets>('margin', margin))
-      ..add(DoubleProperty('maxHeight', maxHeight))
-      ..add(IntProperty('maxlines', maxlines))
-      ..add(DiagnosticsProperty<bool>('obscureText', obscureText))
-      ..add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap))
-      ..add(DiagnosticsProperty<EdgeInsets?>('padding', padding))
-      ..add(
-        DiagnosticsProperty<TextSelectionControls?>(
-          'selectionControls',
-          selectionControls,
-        ),
-      )
-      ..add(EnumProperty<FluIcons?>('prefixIcon', prefixIcon))
-      ..add(EnumProperty<FluIcons?>('suffixIcon', suffixIcon))
-      ..add(EnumProperty<TextAlign>('textAlign', textAlign))
-      ..add(
-        DiagnosticsProperty<TextAlignVertical>(
-          'textAlignVertical',
-          textAlignVertical,
-        ),
-      )
-      ..add(DiagnosticsProperty<TextStyle?>('textStyle', textStyle))
-      ..add(
-        ObjectFlagProperty<void Function(String p1)?>.has(
-          'onFieldSubmitted',
-          onFieldSubmitted,
-        ),
-      )
-      ..add(DiagnosticsProperty<bool>('autofocus', autofocus))
-      ..add(IntProperty('maxLength', maxLength))
-      ..add(
-        EnumProperty<MaxLengthEnforcement?>(
-          'maxLengthEnforcement',
-          maxLengthEnforcement,
-        ),
-      );
-  }
 }
 
-class _FluTextFieldState<T extends FluTextField> extends State<T> {
-  late FocusNode _focusNode;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('height', height));
-  }
+class _FluTextFieldState extends State<FluTextField> {
+  late final FocusNode _focusNode;
 
   @override
   void initState() {
-    _focusNode = widget.focusNode ?? FocusNode();
     super.initState();
+    _focusNode = widget.focusNode ?? FocusNode();
   }
 
-  InputDecoration get _decoration => InputDecoration(
-        border: InputBorder.none,
-        hintText: widget.hint,
-        hintStyle: _defaultTextStyle
-            .copyWith(
-              color: widget.hintColor ?? context.colorScheme.onSurfaceVariant,
-            )
-            .merge(widget.hintStyle),
-        errorStyle: const TextStyle(height: 0, color: Colors.transparent),
-        prefixIcon: widget.prefix ?? _icon(widget.prefixIcon),
-        suffixIcon: widget.suffix ?? _icon(widget.suffixIcon),
-        contentPadding: widget.padding ??
-            (height == null
-                    ? const EdgeInsets.symmetric(vertical: 20)
-                    : EdgeInsets.zero)
-                .copyWith(left: 15, right: 15),
-        counterText: widget.hideCounterText ? '' : widget.counterText,
+  @override
+  void dispose() {
+    if (widget.focusNode == null) {
+      _focusNode.dispose();
+    }
+    super.dispose();
+  }
+
+  /// Builds the main widget tree.
+  @override
+  Widget build(BuildContext context) {
+    final bool isExpanding = widget.expand && !widget.obscureText;
+    final bool isPassword = widget.obscureText;
+
+    final textField = TextFormField(
+      controller: widget.inputController,
+      focusNode: _focusNode,
+      autofocus: widget.autofocus,
+      expands: isExpanding,
+      maxLines: isExpanding
+          ? null
+          : isPassword
+              ? 1
+              : widget.maxLines,
+      minLines: isExpanding
+          ? null
+          : isPassword
+              ? 1
+              : 1,
+      obscureText: isPassword,
+      keyboardType: widget.keyboardType,
+      inputFormatters: widget.inputFormatters,
+      textInputAction: widget.inputAction,
+      selectionControls: widget.selectionControls,
+      style: _effectiveTextStyle,
+      cursorColor: widget.cursorColor ?? context.colorScheme.primary,
+      cursorHeight: widget.cursorHeight,
+      cursorWidth: widget.cursorWidth,
+      textAlign: widget.textAlign,
+      textAlignVertical: widget.textAlignVertical,
+      decoration: _buildInputDecoration(),
+      validator: widget.validator,
+      onChanged: widget.onChanged,
+      onTap: widget.onTap,
+      onFieldSubmitted: widget.onFieldSubmitted,
+      maxLength: widget.maxLength,
+      maxLengthEnforcement: widget.maxLengthEnforcement,
+      onTapOutside: (_) => _focusNode.unfocus(),
+    );
+
+    final bool needsContainer = widget.boxShadow != null ||
+        widget.margin != EdgeInsets.zero ||
+        widget.borderRadius != null ||
+        widget.cornerRadius != null;
+
+    Widget finalField = needsContainer
+        ? Container(
+            margin: widget.margin,
+            padding:
+                widget.padding ?? const EdgeInsets.symmetric(horizontal: 15),
+            clipBehavior: Clip.hardEdge,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              boxShadow: widget.boxShadow,
+              border: widget.borderWidth != null
+                  ? Border.all(
+                      color: widget.borderColor ??
+                          context.colorScheme.surface.withValues(alpha: 0.05),
+                      width: widget.borderWidth!,
+                    )
+                  : null,
+              borderRadius: widget.borderRadius ??
+                  BorderRadius.circular(widget.cornerRadius ?? 99),
+            ),
+            child: textField,
+          )
+        : Padding(
+            padding:
+                widget.padding ?? const EdgeInsets.symmetric(horizontal: 15),
+            child: textField,
+          );
+
+    if (widget.maxHeight != null) {
+      final scrollContent = widget.showScrollbar
+          ? Scrollbar(child: SingleChildScrollView(child: finalField))
+          : SingleChildScrollView(child: finalField);
+
+      return Container(
+        color: widget.fillColor ?? context.colorScheme.surfaceContainer,
+        constraints: BoxConstraints(maxHeight: widget.maxHeight!),
+        child: scrollContent,
       );
-
-  TextStyle get _defaultTextStyle => context.textTheme.bodyMedium!
-      .copyWith(color: widget.color ?? context.colorScheme.onSurfaceVariant)
-      .merge(widget.textStyle);
-
-  Color get _fillColor =>
-      widget.fillColor ?? context.colorScheme.surfaceContainer;
-
-  double? get height {
-    if (widget.expand && widget.maxHeight == null) {
-      return double.infinity;
-    } else if (widget.maxHeight != null) {
-      return null;
     }
 
-    return widget.height ?? 55; // Flu.appSettings.defaultElSize;
+    return finalField;
   }
 
-  Widget? _icon(FluIcons? icon) {
-    if (icon != null) {
+  /// Builds the input decoration for the text field.
+  InputDecoration _buildInputDecoration() {
+    return InputDecoration(
+      border: InputBorder.none,
+      fillColor: widget.fillColor ?? context.colorScheme.surfaceContainer,
+      filled: true,
+      hintText: widget.hint,
+      hintStyle: _effectiveTextStyle
+          .copyWith(
+            color: widget.hintColor ?? context.colorScheme.onSurfaceVariant,
+          )
+          .merge(widget.hintStyle),
+      errorStyle: const TextStyle(height: 0, color: Colors.transparent),
+      prefixIcon: _buildPrefixIcon(),
+      suffixIcon: _buildSuffixIcon(),
+      counterText: widget.hideCounterText ? '' : widget.counterText,
+      contentPadding: EdgeInsets.zero,
+    );
+  }
+
+  /// Gets the effective merged text style.
+  TextStyle get _effectiveTextStyle {
+    return context.textTheme.bodyMedium!
+        .copyWith(color: widget.color ?? context.colorScheme.onSurfaceVariant)
+        .merge(widget.textStyle);
+  }
+
+  /// Builds the prefix icon widget if needed.
+  Widget? _buildPrefixIcon() {
+    if (widget.prefix != null) return widget.prefix;
+    if (widget.prefixIcon != null) {
       return FluIcon(
-        icon,
+        widget.prefixIcon!,
         color: widget.iconColor ?? context.colorScheme.onSurface,
         size: widget.iconSize,
         strokeWidth: widget.iconStrokeWidth,
         style: widget.iconStyle,
       );
     }
-
     return null;
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final Widget field = Container(
-      height: height,
-      margin: widget.margin,
-      clipBehavior: Clip.hardEdge,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: _fillColor,
-        boxShadow: widget.boxShadow,
-        border: widget.borderWidth != null
-            ? Border.all(
-                color: widget.borderColor ??
-                    context.colorScheme.surface.withValues(alpha: .05),
-                width: widget.borderWidth!,
-              )
-            : null,
-        borderRadius: widget.borderRadius ??
-            BorderRadius.circular(
-              widget.cornerRadius ?? 99,
-            ),
-      ),
-      child: TextFormField(
-        maxLength: widget.maxLength,
-        maxLengthEnforcement: widget.maxLengthEnforcement,
-        autofocus: widget.autofocus,
-        controller: widget.inputController,
-        focusNode: _focusNode,
-        expands: height != null,
-        maxLines: widget.maxlines,
-        textAlign: widget.textAlign,
-        textAlignVertical: widget.textAlignVertical,
-        keyboardType: widget.keyboardType,
-        inputFormatters: widget.inputFormatters,
-        textInputAction: widget.inputAction,
-        selectionControls: widget.selectionControls,
-        style: _defaultTextStyle,
-        cursorColor: widget.cursorColor ?? context.colorScheme.primary,
-        cursorHeight: widget.cursorHeight,
-        cursorWidth: widget.cursorWidth,
-        decoration: _decoration,
-        validator: widget.validator,
-        onChanged: widget.onChanged,
-        onTap: widget.onTap,
-        onFieldSubmitted: widget.onFieldSubmitted,
-        obscureText: widget.obscureText,
-        onTapOutside: (_) => _focusNode.unfocus(),
-      ),
-    );
-
-    if (widget.maxHeight != null) {
+  /// Builds the suffix icon widget or a loading spinner if `isLoading` is true.
+  Widget? _buildSuffixIcon() {
+    if (widget.isLoading) {
       return Container(
-        color: _fillColor,
-        constraints: BoxConstraints(maxHeight: widget.maxHeight!),
-        child: Scrollbar(
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: field,
+        height: 24,
+        width: 24,
+        alignment: Alignment.center,
+        child: SizedBox(
+          height: 14,
+          width: 14,
+          child: CircularProgressIndicator(
+            strokeWidth: 2,
+            valueColor: AlwaysStoppedAnimation<Color>(
+              context.colorScheme.onSurfaceVariant,
+            ),
           ),
         ),
       );
     }
 
-    return field;
+    if (widget.suffix != null) return widget.suffix;
+    if (widget.suffixIcon != null) {
+      return FluIcon(
+        widget.suffixIcon!,
+        color: widget.iconColor ?? context.colorScheme.onSurface,
+        size: widget.iconSize,
+        strokeWidth: widget.iconStrokeWidth,
+        style: widget.iconStyle,
+      );
+    }
+    return null;
   }
 }
