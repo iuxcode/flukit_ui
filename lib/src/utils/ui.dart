@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 /// Provide UI utilities
-extension FluUiUtils on FlukitUI {
+extension FluUiUtils on Flukit {
   /// Hide the keyboard
   Future<void> hideKeyboard() async {
     await SystemChannels.textInput.invokeMethod('TextInput.hide');
