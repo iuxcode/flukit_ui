@@ -278,8 +278,6 @@ class _FluTextFieldState extends State<FluTextField> {
     Widget finalField = needsContainer
         ? Container(
             margin: widget.margin,
-            padding:
-                widget.padding ?? const EdgeInsets.symmetric(horizontal: 15),
             clipBehavior: Clip.hardEdge,
             alignment: Alignment.center,
             decoration: BoxDecoration(
@@ -297,11 +295,7 @@ class _FluTextFieldState extends State<FluTextField> {
             ),
             child: textField,
           )
-        : Padding(
-            padding:
-                widget.padding ?? const EdgeInsets.symmetric(horizontal: 15),
-            child: textField,
-          );
+        : textField;
 
     if (widget.maxHeight != null) {
       final scrollContent = widget.showScrollbar
@@ -334,7 +328,8 @@ class _FluTextFieldState extends State<FluTextField> {
       prefixIcon: _buildPrefixIcon(),
       suffixIcon: _buildSuffixIcon(),
       counterText: widget.hideCounterText ? '' : widget.counterText,
-      contentPadding: EdgeInsets.zero,
+      contentPadding:
+          widget.padding ?? const EdgeInsets.symmetric(horizontal: 15),
     );
   }
 
