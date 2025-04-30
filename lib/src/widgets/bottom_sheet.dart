@@ -92,7 +92,7 @@ class FluModalBottomSheet extends StatelessWidget {
           children: [
             FluLine(
               height: 3,
-              width: context.width * .20,
+              width: context.width * .35,
               radius: 50,
               color: context.colorScheme.surface,
               margin: const EdgeInsets.only(bottom: 8),

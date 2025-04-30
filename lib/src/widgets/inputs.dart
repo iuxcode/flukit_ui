@@ -30,7 +30,7 @@ class FluTextField extends StatefulWidget {
     this.obscureText = false,
     this.autofocus = false,
     this.margin = EdgeInsets.zero,
-    this.padding,
+    this.contentPadding,
     this.fillColor,
     this.borderColor,
     this.borderRadius,
@@ -106,7 +106,7 @@ class FluTextField extends StatefulWidget {
   final EdgeInsets margin;
 
   /// Inner padding between the text and the field border.
-  final EdgeInsets? padding;
+  final EdgeInsets? contentPadding;
 
   /// Custom fill color for the background.
   final Color? fillColor;
@@ -231,8 +231,8 @@ class _FluTextFieldState extends State<FluTextField> {
   /// Builds the main widget tree.
   @override
   Widget build(BuildContext context) {
-    final bool isExpanding = widget.expand && !widget.obscureText;
-    final bool isPassword = widget.obscureText;
+    final isExpanding = widget.expand && !widget.obscureText;
+    final isPassword = widget.obscureText;
 
     final textField = TextFormField(
       controller: widget.inputController,
@@ -270,16 +270,15 @@ class _FluTextFieldState extends State<FluTextField> {
       onTapOutside: (_) => _focusNode.unfocus(),
     );
 
-    final bool needsContainer = widget.boxShadow != null ||
+    final needsContainer = widget.boxShadow != null ||
         widget.margin != EdgeInsets.zero ||
         widget.borderRadius != null ||
         widget.cornerRadius != null;
 
-    Widget finalField = needsContainer
+    final finalField = needsContainer
         ? Container(
             margin: widget.margin,
             clipBehavior: Clip.hardEdge,
-            alignment: Alignment.center,
             decoration: BoxDecoration(
               color: Colors.transparent,
               boxShadow: widget.boxShadow,
@@ -328,8 +327,7 @@ class _FluTextFieldState extends State<FluTextField> {
       prefixIcon: _buildPrefixIcon(),
       suffixIcon: _buildSuffixIcon(),
       counterText: widget.hideCounterText ? '' : widget.counterText,
-      contentPadding:
-          widget.padding ?? const EdgeInsets.symmetric(horizontal: 15),
+      contentPadding: _effectiveContentPadding,
     );
   }
 
@@ -339,6 +337,9 @@ class _FluTextFieldState extends State<FluTextField> {
         .copyWith(color: widget.color ?? context.colorScheme.onSurfaceVariant)
         .merge(widget.textStyle);
   }
+
+  EdgeInsets get _effectiveContentPadding =>
+      widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 15);
 
   /// Builds the prefix icon widget if needed.
   Widget? _buildPrefixIcon() {
