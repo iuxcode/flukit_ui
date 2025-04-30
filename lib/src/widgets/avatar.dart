@@ -237,7 +237,7 @@ class _FluAvatarState extends State<FluAvatar> {
         ),
         child: widget.label != null
             ? Text(
-                (widget.label ?? 'Flukit').toAvatarLabel().toUpperCase(),
+                Flu.textToAvatarLabel(widget.label ?? 'Flukit').toUpperCase(),
                 style: TextStyle(
                   color: context.colorScheme.onPrimaryContainer,
                   fontWeight: FontWeight.bold,
