@@ -78,6 +78,7 @@ extension FluUiUtils on Flukit {
         const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
     void Function(Country)? onCountrySelected,
     double? maxHeight,
+    Widget Function(TextEditingController)? searchField,
   }) async =>
       showFluModalBottomSheet(
         context,
@@ -91,6 +92,7 @@ extension FluUiUtils on Flukit {
           countries: countries ?? Flu.countries,
           exclude: exclude,
           onCountrySelected: onCountrySelected,
+          searchField: searchField,
         ),
       );
 }
